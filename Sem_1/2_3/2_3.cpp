@@ -13,5 +13,7 @@ int main() {
         }
         sum += tmp;
     }
-cout << sum << endl;
+    cout << sum << endl;
+    
+    return 0;
 }
