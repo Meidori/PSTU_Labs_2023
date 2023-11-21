@@ -10,8 +10,7 @@ int main() {
         cout << "Невозможно посчитать сумму натуральных чисел при n <= 0" << endl;
     }
     else {
-        for (int i = 1; i <= n; i++)
-        {
+        for (int i = 1; i <= n; i++) {
             sum += i;
         }
         cout << sum << endl;
