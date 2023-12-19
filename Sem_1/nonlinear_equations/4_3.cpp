@@ -26,7 +26,7 @@ int main() {
     float x, xPrev;
     double lambda = -0.1, eps = 0.000001;
     x = 2;
-    xPrev = 0;
+    xPrev = 0;  // берем заведомо меньше x
 
     while (abs(x - xPrev) > eps) {
         xPrev = x;
