@@ -94,7 +94,6 @@ bool checkQueen(int i) {
 			else if (!(result = checkQueen(i + 1))) { 
                 deleteQueen(i, j); 
             }
-		
 		}
 		if (result) {
 			break;
