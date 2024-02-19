@@ -31,10 +31,10 @@ void showBoard() {
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			if (board[i][j] == QUEEN) {
-				cout<< "[Q] ";
+				cout << "[Q] ";
 			}
 			else {
-				cout<< "[ ] ";
+				cout << "[ ] ";
 			}
 		}
 		cout << endl;
