@@ -27,7 +27,9 @@ int sum(const int k, ...) {
         if (i % 2 == 0) {
             result += terms[i];
         }
-        else result -= terms[i];
+        else {
+            result -= terms[i];
+        }
     }
 
     va_end(args);
