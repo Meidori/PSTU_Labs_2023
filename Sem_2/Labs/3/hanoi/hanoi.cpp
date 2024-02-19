@@ -26,6 +26,8 @@ int main() {
     int other = 6 - (first + last);
 
     hanoi(n, first, last, other);
+
+    return 0;
 }
 
 
