@@ -96,7 +96,9 @@ bool checkQueen(int i) {
             }
 		
 		}
-		if (result) break;
+		if (result) {
+			break;
+		}
 	}
 	return result;  
 }
