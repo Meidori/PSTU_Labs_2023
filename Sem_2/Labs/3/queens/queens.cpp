@@ -13,6 +13,7 @@ void solve(int i);
 
 int main() {
     solve(0);
+    return 0;
 }
 
 
