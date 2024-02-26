@@ -40,6 +40,14 @@ void output(Human user) {
 }
 
 
+void replaceElements(Human user) {
+    FILE *tmp;
+    tmp = fopen("tmp.dat", "w+");
+    f = tmp;
+    fclose(tmp);
+}
+
+
 int main() {
     Human user;
     f = fopen("file.dat", "w+");
@@ -51,6 +59,15 @@ int main() {
         cout << "Введите ФИО, год рождения, рост, вес:" << endl;
         Human user = input_Human();
         write(user);
+        cout << "Вы ввели: " << endl;
+        output(user);
+
+        replaceElements(user);
+
+        cout << "Вы ввели: " << endl;
         output(user);
     }
+
+    fclose(f);
+    return 0;
 }
