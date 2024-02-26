@@ -37,14 +37,7 @@ void write(Human user) {
 void output(Human user) {
     fread(&user, sizeof(Human), 1, f);
     printf("%s %d %f %f",user.full_name, user.year_of_birth, user.height, user.weight);
-}
-
-
-void replaceElements(Human user) {
-    FILE *tmp;
-    tmp = fopen("tmp.dat", "w+");
-    f = tmp;
-    fclose(tmp);
+    cout << endl;
 }
 
 
@@ -59,12 +52,7 @@ int main() {
         cout << "Введите ФИО, год рождения, рост, вес:" << endl;
         Human user = input_Human();
         write(user);
-        cout << "Вы ввели: " << endl;
-        output(user);
-
-        replaceElements(user);
-
-        cout << "Вы ввели: " << endl;
+        cout << "Вы ввели:" << endl;
         output(user);
     }
 
