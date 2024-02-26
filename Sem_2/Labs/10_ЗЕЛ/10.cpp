@@ -35,18 +35,18 @@ void DeleteElements(int *&arr, int &size, int K, int pos) {
 
 void AddElements(int *&arr, int &size, int K, int pos) {
     int *newNumbers = {new int[size + K]};
-    for (int i = 0; i < pos; i++) {
+    for (int i = 0; i < pos - 1; i++) {
         newNumbers[i] = arr[i];
     }
     
     int newNumber;
     cout << "Введите K новых чисел:" << endl;
-    for (int i = pos; i < pos + K; i++) {
+    for (int i = pos - 1; i < pos - 1 + K; i++) {
         cin >> newNumber;
         newNumbers[i] = newNumber;
     }
     
-    for (int i = pos + K; i < size + K; i++) {
+    for (int i = pos - 1 + K; i < size + K; i++) {
         newNumbers[i] = arr[i - K];
     }
 
@@ -75,7 +75,7 @@ int main() {
     ShowArray(numbers, n);
 
     int pos2;
-    cout << "Введите номер (ДЛЯ НОВГО МАССИВА), после какого элемента добавить K элементов:" << endl;
+    cout << "Введите номер (ДЛЯ НОВГО МАССИВА), c какого элемента добавить K элементов:" << endl;
     cin >> pos2;
     AddElements(numbers, n, K, pos2);
     
