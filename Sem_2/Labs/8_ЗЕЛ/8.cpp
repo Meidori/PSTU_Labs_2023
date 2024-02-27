@@ -15,47 +15,37 @@ struct Human {
 };
 
 
-Human input_Human() {
-    string name;
-    Human obj;
-    getline(cin, name);
-    for (int i = 0; i < name.length(); i++) {
-        obj.full_name[i] = name[i];
-    }
-    cin >> obj.year_of_birth;
-    cin >> obj.height;
-    cin >> obj.weight;
-    return obj;
-}
+void add_note(Human &user) {
 
+    cout << "Введите ФИО (не более 100 символов), год рождения, рост, вес:" << endl;
+    scanf("%s", user.full_name);
+    scanf("%d", &user.year_of_birth);
+    scanf("%f", &user.height);
+    scanf("%f", &user.weight);
 
-void write(Human user) {
     fwrite(&user, sizeof(Human), 1, f);
 }
 
 
-void output(Human user) {
-    fread(&user, sizeof(Human), 1, f);
-    printf("%s %d %f %f",user.full_name, user.year_of_birth, user.height, user.weight);
-    cout << endl;
+void del_note(Human user) {
+
+}
+
+
+void show_notes(Human user) {
+    
 }
 
 
 int main() {
     Human user;
-    f = fopen("file.dat", "w+");
-    if (f == NULL) {
-        cout << "Не удалось открыть файл" << endl;
-    }
-    else {
-        cout << "Файл открыт" << endl;
-        cout << "Введите ФИО, год рождения, рост, вес:" << endl;
-        Human user = input_Human();
-        write(user);
-        cout << "Вы ввели:" << endl;
-        output(user);
-    }
-
+    f = fopen("file.dat", "wb");
+    add_note(user);
     fclose(f);
+
+    f = fopen("file.dat", "rb");
+    show_notes(user);
+
+
     return 0;
 }
