@@ -107,9 +107,8 @@ struct List {
             cin >> value;
             new_node -> data = value;
             if (index == 0 && is_empty()) {
-                Node *tmp = new Node;
-                ptr_to_first = tmp;
-                ptr_to_last = tmp;
+                ptr_to_first = new_node;
+                ptr_to_last = new_node;
             }
             else if (index == 0) {
                 ptr_to_first -> ptr_to_prev = new_node;
