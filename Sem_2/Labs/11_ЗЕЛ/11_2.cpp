@@ -220,7 +220,7 @@ int main() {
     cout << "Список записан в файл и удален из памяти." << endl;
 
     cout << "Содержимое файла:" << endl;
-    ifstream in("file.txt");
+    ifstream in("file_11_2.txt");
     if (in.is_open()) {
         int x;
         while (in >> x) {
