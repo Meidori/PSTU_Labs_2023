@@ -6,102 +6,132 @@ using namespace std;
 
 struct Node {
     int data;
-    Node *next;
+    Node *ptr_to_next = nullptr;
 };
 
 
-struct list {
-    Node *first;
-    Node *last;
+struct List {
+    Node *ptr_to_first = nullptr;
+    Node *ptr_to_last = nullptr;
 
 
     void init() {
-        first = nullptr;
-        last = nullptr;
+        ptr_to_first = nullptr;
+        ptr_to_last = nullptr;
     }
 
 
     bool is_empty() {
-        return first == nullptr;
+        return ptr_to_first == nullptr;
+    }
+
+
+    int get_length() {
+        if (is_empty()) {
+            return 0;
+        }
+        else {
+            Node *tmp = new Node;
+            int counter = 1;
+            tmp = ptr_to_first;
+            while (tmp -> ptr_to_next != nullptr) {
+                counter++;
+                tmp = tmp -> ptr_to_next;
+            }
+            return counter;
+        }
     }
 
     
-    void push_back(int value, int &k) {
-        Node *p = new Node;
-        p -> data = value;
+    void push_back(int value) {
+        Node *tmp = new Node;
+        tmp -> data = value;
         if (is_empty()) {
-            first = p;
-            last = p;
-            k++;
-            return;
+            ptr_to_first = tmp;
+            ptr_to_last = tmp;
         }
-        last -> next = p;
-        last = p;
-        k++;
+        else {
+            ptr_to_last -> ptr_to_next = tmp;
+            ptr_to_last = tmp;
+        }
     }
 
 
-    int pop(int pos, int &k) {
-        if ((!(is_empty())) && (pos <= k) && (pos >= 0)) {
-            pos--;
-            Node *p = first, *prev = first;
-            for (int i = 0; i < pos; i++) {
-                prev = p;
-                p = p -> next;
+    int pop(int index) {
+        int list_length = get_length();
+        if ((!(is_empty())) && (index < list_length) && (index >= 0)) {
+            Node *tmp_cur = ptr_to_first, *tmp_prev = ptr_to_first;
+            for (int i = 0; i < index; i++) {
+                tmp_prev = tmp_cur;
+                tmp_cur = tmp_cur -> ptr_to_next;
             }
-            if (pos == 0) {
-                first = p -> next;
+            if (index == 0) {
+                if (list_length == 1) {
+                    ptr_to_first = nullptr;
+                    ptr_to_last = nullptr;
+                }
+                else {
+                    ptr_to_first = tmp_cur -> ptr_to_next;
+                }
+            }
+            else if (index == list_length) {
+                tmp_prev -> ptr_to_next = tmp_cur -> ptr_to_next;
+                ptr_to_last = tmp_prev;
             }
             else {
-                prev -> next = p -> next;
+                tmp_prev -> ptr_to_next = tmp_cur -> ptr_to_next;
             }
-            int tmp = p -> data;
-            free(p);
-            k--;
-            return tmp;
+            int deleted_value = tmp_cur -> data;
+            delete tmp_cur;
+            return deleted_value;
             }
+        cout << "Не удалось получить данные по данному индексу. Возвращено значение 0." << endl;
+        return 0;
     }
 
 
-    void add_note(int pos, int &k) {
-        Node *note = new Node;
-        if ((pos <= k) && (pos >= 0)) {
-            pos--;
-            Node *p = first, *prev = first;
-            for (int i = 0; i < pos; i++) {
-                prev = p;
-                p = p -> next;
+    void add_value_by_position(int pos) {
+        Node *new_node = new Node;
+        Node *tmp_cur = ptr_to_first, *tmp_prev = ptr_to_first;
+        int list_length = get_length();
+        if (pos <= list_length + 1 && pos > 0) {
+            int index = pos - 1;
+            for (int i = 0; i < index; i++) {
+                tmp_prev = tmp_cur;
+                tmp_cur = tmp_cur -> ptr_to_next;
             }
             int value;
             cout << "Введите значение элемента:" << endl;
             cin >> value;
-            note -> data = value;
-
-            if (pos == 0) {
-                note -> next = first;
-                first = note;
+            new_node -> data = value;
+            if (index == 0 && is_empty()) {
+                ptr_to_first = new_node;
+                ptr_to_last = new_node;
             }
-            else if (pos == k - 1) {
-                p -> next = note;
-                note -> next = nullptr;
+            else if (index == 0) {
+                new_node -> ptr_to_next = ptr_to_first;
+                ptr_to_first = new_node;
+            }
+            else if (index == list_length) {
+                ptr_to_last -> ptr_to_next = new_node;
+                tmp_prev -> ptr_to_next = new_node;
+                ptr_to_last = new_node;
             }
             else {
-                prev -> next = note;
-                note -> next = p;
+                tmp_prev -> ptr_to_next = new_node;
+                new_node -> ptr_to_next = tmp_cur;
             }
-
-            k++;
         }
     }
 
 
-    void write(int &k) {
-        int c = k;
+    void write_in_file() {
+        int list_length = get_length();
         ofstream out;
-        out.open("file.txt");
+        out.open("file_11_1.txt");
         if (out.is_open()) {
-            for (int i = 0; i < c; i++) {
-                out << pop(1, k) << endl;
+            for (int i = 0; i < list_length; i++) {
+                out << pop(0) << endl;
             } 
         }
         out.close();
@@ -109,13 +139,12 @@ struct list {
     }
 
 
-    void restore(int &k, list l) {
-        ifstream in("file.txt");
-        if (in.is_open()) {
-            int x;
-            while (in >> x) {
-                push_back(x, k);
-            }
+    void resotre_from_file(List list) {
+        ifstream in;
+        in.open("file_11_1.txt");
+        int value;
+        while (in >> value) {
+            push_back(value);
         }
         in.close();
     }
@@ -126,58 +155,65 @@ struct list {
             cout << "Список пустой." << endl;
             return;
         }
-        Node *p = first;
-        while (p != nullptr) {
-            cout << p -> data << " ";
-            p = p -> next;
+        else {
+            Node *tmp = ptr_to_first;
+            cout << tmp -> data;
+            int list_length = get_length();
+            if (list_length > 1) {
+                for (int i = 1; i < list_length; i++) {
+                    tmp = tmp -> ptr_to_next; 
+                    cout << " " << tmp -> data;
+                }
+            }
+            cout << endl;
         }
-        cout << endl;
     }
 };
 
 
 int main() {
-    list *l = new list;
-    l -> init();
-    int n, tmp, k = 0;
-    cout << "Введите количество элементов в списке:" << endl;
-    cin >> n;
-
-    for (int i = 0; i < n; i++) {
+    List *list_of_nums = new List;
+    list_of_nums -> init();
+    int number_of_values, new_value;
+    cout << "Введите количество значений, которое будет содержаться в списке:" << endl;
+    cin >> number_of_values;
+    for (int i = 0; i < number_of_values; i++) {
         cout << "Введите значение:" << endl;
-        cin >> tmp;
-        l -> push_back(tmp, k);
+        cin >> new_value;
+        list_of_nums -> push_back(new_value);
     }
 
-    cout << "Список выглядит так:" << endl;
-    l -> show_list();
+    cout << "Список после заполнения:" << endl;
+    list_of_nums -> show_list();
 
-    int K, pos1, pos2;
-    cout << "Введите число K - количество элементов, которые будут удалены/добавлены:" << endl; 
-    cin >> K;
+    int number_of_changes, pos;
+    cout << "Введите число K - количество элементов, которые будут удалены/добавлены:" << endl;
+    cin >> number_of_changes;
     cout << "Введите номер элемента, с которого нужно удалить K элементов:" << endl;
-    cin >> pos1;
-    for (int i = 0; i < K; i++) {
-        cout << "Удаляем элемент: " << l -> pop(pos1, k) << endl;
+    cin >> pos;
+    for (int i = 0; i < number_of_changes; i++) {
+        cout << "Удаляем элемент: " << list_of_nums -> pop(pos - 1) << endl;
     }
+    
     cout << "Список после удаления K элементов:" << endl;
-    l -> show_list();
+    list_of_nums -> show_list();
 
     cout << "Введите номер элемента, с которого нужно добавить K элементов:" << endl;
-    cin >> pos2;
-    for (int i = 0; i < K; i++) {
-        l -> add_note(pos2, k);
-        pos2++;
+    cin >> pos;
+    for (int i = 0; i < number_of_changes; i++) {
+        list_of_nums -> add_value_by_position(pos);
+        pos++;
     }
+    
     cout << "Список после добавления K элементов:" << endl;
-    l -> show_list();
+    list_of_nums -> show_list();
 
-    l -> write(k);
-
-    delete l;
+    list_of_nums -> write_in_file();
+    delete list_of_nums;
+    cout << "Список записан в файл и удален из памяти." << endl;
 
     cout << "Содержимое файла:" << endl;
-    ifstream in("file.txt");
+    ifstream in("file_11_1.txt");
     if (in.is_open()) {
         int x;
         while (in >> x) {
@@ -186,12 +222,14 @@ int main() {
         cout << endl;
     }
     in.close();
-    
-    list *restored_l = new list;
-    restored_l -> init();
-    restored_l -> restore(k, *restored_l);
-    cout << "Содержимое восстановленного списка:" << endl;
-    restored_l -> show_list();
-    
+
+    List *restored_list_of_nums = new List;
+    restored_list_of_nums -> init();
+    cout << "Создан новый список." << endl;
+
+    restored_list_of_nums -> resotre_from_file(*restored_list_of_nums);
+    cout << "Содержимое списка, после взятия данных из файла:" << endl;
+    restored_list_of_nums -> show_list();
+
     return 0;
 }
