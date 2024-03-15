@@ -95,12 +95,12 @@ struct List {
 
     void add_value_by_position(int pos) {
         Node *new_node = new Node;
-        Node *tmp_cur = ptr_to_first;
+        Node *tmp = ptr_to_first;
         int list_length = get_length();
         if (pos <= list_length + 1 && pos > 0) {
             int index = pos - 1;
             for (int i = 0; i < index; i++) {
-                tmp_cur = tmp_cur -> ptr_to_next;
+                tmp = tmp -> ptr_to_next;
             }
             int value;
             cout << "Введите значение элемента:" << endl;
@@ -122,10 +122,10 @@ struct List {
                 ptr_to_last = new_node;
             }
             else {
-                new_node -> ptr_to_prev = tmp_cur -> ptr_to_prev;
-                new_node -> ptr_to_next = tmp_cur;
-                tmp_cur -> ptr_to_prev -> ptr_to_next = new_node;
-                tmp_cur -> ptr_to_prev = new_node;
+                new_node -> ptr_to_prev = tmp -> ptr_to_prev;
+                new_node -> ptr_to_next = tmp;
+                tmp -> ptr_to_prev -> ptr_to_next = new_node;
+                tmp -> ptr_to_prev = new_node;
             }
         } 
     }
