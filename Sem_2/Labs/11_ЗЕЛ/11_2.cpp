@@ -88,6 +88,8 @@ struct List {
             delete tmp_cur;
             return deleted_value;
         }
+        cout << "Не удалось получить данные по данному индексу. Возвращено значение 0." << endl;
+        return 0;
     }
 
 
