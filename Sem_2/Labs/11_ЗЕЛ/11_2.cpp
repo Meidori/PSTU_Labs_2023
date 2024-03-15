@@ -58,7 +58,7 @@ struct List {
     }
 
 
-    auto pop(int index) {
+    int pop(int index) {
         int list_length = get_length();
         if (!(is_empty()) && index < list_length && index >= 0) {
             Node *tmp = ptr_to_first;
