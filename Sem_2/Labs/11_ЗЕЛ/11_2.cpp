@@ -61,9 +61,9 @@ struct List {
     auto pop(int index) {
         int list_length = get_length();
         if (!(is_empty()) && index < list_length && index >= 0) {
-            Node *tmp_cur = ptr_to_first;
+            Node *tmp = ptr_to_first;
             for (int i = 0; i < index; i++) {
-                tmp_cur = tmp_cur -> ptr_to_next;
+                tmp = tmp -> ptr_to_next;
             }
             if (index == 0) {
                 if (list_length == 1) {
@@ -71,21 +71,21 @@ struct List {
                     ptr_to_last = nullptr;
                 }
                 else {
-                    tmp_cur -> ptr_to_next -> ptr_to_prev = tmp_cur -> ptr_to_prev;
-                    ptr_to_first = tmp_cur -> ptr_to_next;
+                    tmp -> ptr_to_next -> ptr_to_prev = tmp -> ptr_to_prev;
+                    ptr_to_first = tmp -> ptr_to_next;
                     
                 }
             }
             else if (index == list_length - 1) {
-                tmp_cur -> ptr_to_prev -> ptr_to_next = tmp_cur -> ptr_to_next;
-                ptr_to_last = tmp_cur -> ptr_to_prev;
+                tmp -> ptr_to_prev -> ptr_to_next = tmp -> ptr_to_next;
+                ptr_to_last = tmp -> ptr_to_prev;
             }
             else {
-                tmp_cur -> ptr_to_prev -> ptr_to_next = tmp_cur -> ptr_to_next;
-                tmp_cur -> ptr_to_next -> ptr_to_prev = tmp_cur -> ptr_to_prev;
+                tmp -> ptr_to_prev -> ptr_to_next = tmp -> ptr_to_next;
+                tmp -> ptr_to_next -> ptr_to_prev = tmp -> ptr_to_prev;
             }
-            int deleted_value = tmp_cur -> data;
-            delete tmp_cur;
+            int deleted_value = tmp -> data;
+            delete tmp;
             return deleted_value;
         }
         cout << "Не удалось получить данные по данному индексу. Возвращено значение 0." << endl;
