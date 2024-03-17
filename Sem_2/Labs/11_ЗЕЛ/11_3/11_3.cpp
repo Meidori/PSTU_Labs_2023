@@ -52,8 +52,8 @@ struct Stack {
     void delete_by_index(int index) {
         if (!(is_empty()) && index < size && index >= 0) {
             Stack *tmp_stack = new Stack;
-            int value, length_size = size;
-            for (int i = 0; i < length_size; i++) {
+            int value, stack_length = size;
+            for (int i = 0; i < stack_length; i++) {
                 value = pop();
                 if (i != index) {
                     tmp_stack -> push(value);
@@ -63,8 +63,8 @@ struct Stack {
                 }          
             }
 
-            length_size = tmp_stack -> size;
-            for (int i = 0; i < length_size; i++) {
+            stack_length = tmp_stack -> size;
+            for (int i = 0; i < stack_length; i++) {
                 value = tmp_stack -> pop();
                 push(value);
             }
@@ -83,20 +83,20 @@ struct Stack {
         }
         else if (index <= size && index >= 0){
             Stack *tmp_stack = new Stack;
-            int value_from_stack, length_size = size;
-            for (int i = 0; i < length_size; i++) {
+            int value_from_stack, stack_length = size;
+            for (int i = 0; i < stack_length; i++) {
                 value_from_stack = pop();
                 if (i == index) {
                     tmp_stack -> push(value);
                 }
                 tmp_stack -> push(value_from_stack);
             }
-            if (index == length_size) {
+            if (index == stack_length) {
                 tmp_stack -> push(value);
             }
 
-            length_size = tmp_stack -> size;
-            for (int i = 0; i < length_size; i++) {
+            stack_length = tmp_stack -> size;
+            for (int i = 0; i < stack_length; i++) {
                 value = tmp_stack -> pop();
                 push(value);
             }
