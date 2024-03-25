@@ -1,6 +1,8 @@
 #include <iostream>
 #include "bucket_sort.h"
 #include "counting_sort.h"
+// #include "merge_sort.h"
+// #include "hoara.h"
 using namespace std;
 
 
@@ -28,7 +30,7 @@ int main() {
         cout << "Отсортированный массив:" << endl;
         print_array(array_of_nums, size);
         break;
-        }
+    }
     case 2: {
         int array_of_nums[size] = {15, 15, 15, 15, 3, 5, 5, 5, 3, 3, 5, 3, 9, 7, 7, 9, 9, 9, 7, 3, 15, 4, 4, 3, 6};
         cout << "Изначальный массив:" << endl;
@@ -37,7 +39,25 @@ int main() {
         cout << "Отсортированный массив:" << endl;
         print_array(array_of_nums, size);
         break;
-        }
+    }
+    case 3: {
+        int array_of_nums[size] = {};
+        cout << "Изначальный массив:" << endl;
+        print_array(array_of_nums, size);
+        // merge_sort(array_of_nums, 0, size - 1);
+        cout << "Отсортированный массив:" << endl;
+        print_array(array_of_nums, size);
+        break;
+    }
+    case 4: {
+        int array_of_nums[size] = {163, 344, 426, 136, 984, 852, 413, 642, 238, 923, 98, 106, 301, 519, 129, 231, 539, 1476, 259, 616, 259, 149, 931, 346, 100};
+        cout << "Изначальный массив:" << endl;
+        print_array(array_of_nums, size);
+        // quick_hoara(array_of_nums, 0, size - 1);
+        cout << "Отсортированный массив:" << endl;
+        print_array(array_of_nums, size);
+        break;
+    }
     default: {
         cout << "Ошибка!\n";
         break;
