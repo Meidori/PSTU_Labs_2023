@@ -2,7 +2,7 @@
 #include "bucket_sort.h"
 #include "counting_sort.h"
 // #include "merge_sort.h"
-// #include "lomuto.h"
+#include "lomuto_sort.h"
 using namespace std;
 
 
@@ -53,7 +53,7 @@ int main() {
         int array_of_nums[size] = {163, 344, 426, 136, 984, 852, 413, 642, 238, 923, 98, 106, 301, 519, 129, 231, 539, 1476, 259, 616, 259, 149, 931, 346, 100};
         cout << "Изначальный массив:" << endl;
         print_array(array_of_nums, size);
-        // quick_lomuto(array_of_nums, 0, size - 1);
+        quick_lomuto(array_of_nums, 0, size - 1);
         cout << "Отсортированный массив:" << endl;
         print_array(array_of_nums, size);
         break;
