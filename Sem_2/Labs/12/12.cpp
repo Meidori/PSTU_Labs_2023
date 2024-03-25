@@ -1,7 +1,7 @@
 #include <iostream>
 #include "bucket_sort.h"
 #include "counting_sort.h"
-// #include "merge_sort.h"
+#include "merge_sort.h"
 #include "lomuto_sort.h"
 using namespace std;
 
@@ -41,10 +41,10 @@ int main() {
         break;
     }
     case 3: {
-        int array_of_nums[size] = {};
+        int array_of_nums[size] = {23, 25, 64, 32, 21, 53, 97, 34, 64, 98, 43, 32, 24, 53, 26, 98, 23, 51, 42, 99, 23, 12, 23, 10, 99};
         cout << "Изначальный массив:" << endl;
         print_array(array_of_nums, size);
-        // merge_sort(array_of_nums, 0, size - 1);
+        merge_sort(array_of_nums, 0, size - 1);
         cout << "Отсортированный массив:" << endl;
         print_array(array_of_nums, size);
         break;
