@@ -2,6 +2,7 @@
 #include "interpolation_search.h"
 #include "lomuto_sort.h"
 #include "linear_search.h"
+#include "binary_search.h"
 using namespace std;
 
 
@@ -39,6 +40,8 @@ int main() {
 
     switch (search_number) {
     case 1: {
+        cout << "Введенный массив:" << endl;
+        print_array(array_of_numbers, size);
         cout << "Первый индекс элемента массива равного ключу: " << linear_search(array_of_numbers, size, key) << endl;
 
         break;
@@ -52,7 +55,10 @@ int main() {
         break;
     }
     case 3: {
-
+        quick_lomuto(array_of_numbers, 0, size - 1);
+        cout << "Массив после сортировки:" << endl;
+        print_array(array_of_numbers, size - 1);
+        cout << "Первый индекс элемента массива равного ключу: " << binary_search(array_of_numbers, 0, size - 1, key) << endl;
         break;
     }
     default:
