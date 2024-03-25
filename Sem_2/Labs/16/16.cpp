@@ -1,6 +1,6 @@
 #include <iostream>
 #include "interpolation_search.h"
-#include 
+#include "lomuto_sort.h"
 using namespace std;
 
 
@@ -16,7 +16,7 @@ void print_array(int arr[], int size) {
 
 
 int main() {
-    int size, tmp;
+    int size, key, tmp;
     cout << "Введите размер массива целых чисел." << endl;
     cin >> size;
     int array_of_numbers[size];
@@ -26,11 +26,15 @@ int main() {
         array_of_numbers[i] = tmp;
         cout << endl;
     }
-    
 
+    quick_lomuto(array_of_numbers, 0, size - 1);
+    cout << "Массив после сортировки:" << endl;
+    print_array(array_of_numbers, size);
 
-    
+    cout << "Введите ключ: ";
+    cin >> key;
+    cout << endl;
+    cout << "Первый индекс элемента массива равного ключу: " << interpolation_search(array_of_numbers, 0, size - 1, key) << endl;
 
-
-
+    return 0;
 }
