@@ -1,6 +1,7 @@
 #include <iostream>
 #include "interpolation_search.h"
 #include "lomuto_sort.h"
+#include "linear_search.h"
 using namespace std;
 
 
@@ -27,14 +28,37 @@ int main() {
         cout << endl;
     }
 
-    quick_lomuto(array_of_numbers, 0, size - 1);
-    cout << "Массив после сортировки:" << endl;
-    print_array(array_of_numbers, size);
-
     cout << "Введите ключ: ";
     cin >> key;
     cout << endl;
-    cout << "Первый индекс элемента массива равного ключу: " << interpolation_search(array_of_numbers, 0, size - 1, key) << endl;
+
+    cout << "Выберите метод поиска:" << endl;
+    cout << "1)Линейный\n2)Интерполяционный\n3)Бинарный" << endl;
+    int search_number;
+    cin >> search_number;
+
+    switch (search_number) {
+    case 1: {
+        cout << "Первый индекс элемента массива равного ключу: " << linear_search(array_of_numbers, size, key) << endl;
+
+        break;
+    }
+    case 2: {
+        quick_lomuto(array_of_numbers, 0, size - 1);
+        cout << "Массив после сортировки:" << endl;
+        print_array(array_of_numbers, size);
+        cout << "Первый индекс элемента массива равного ключу: " << interpolation_search(array_of_numbers, 0, size - 1, key) << endl;
+
+        break;
+    }
+    case 3: {
+
+        break;
+    }
+    default:
+        cout << "Ошибка!\n"; 
+        break;
+    }
 
     return 0;
 }
