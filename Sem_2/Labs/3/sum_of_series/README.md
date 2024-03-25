@@ -87,9 +87,9 @@ int main() {
 
 # 2.2 Блок-схема программы
 
-<image src="sum_of_series1.png">
+<image src="images/sum_of_series1.png">
 
-<image src="sum_of_series2.png">
+<image src="images/sum_of_series2.png">
 
 # Тесты
 

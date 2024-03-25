@@ -93,7 +93,7 @@ int main() {
 
 # 2.2 Блок-схема программы
 
-<image src="9_5.png">
+<image src="images/9_5.png">
 
 # Тесты
 

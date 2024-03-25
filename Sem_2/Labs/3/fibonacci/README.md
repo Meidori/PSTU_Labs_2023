@@ -40,7 +40,7 @@ int main() {
 
 # 2.2 Блок-схема программы
 
-<image src="fibonacci.png">
+<image src="images/fibonacci.png">
 
 # Тесты
 

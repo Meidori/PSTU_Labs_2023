@@ -106,7 +106,7 @@ int main() {
 
 # 2.2 Блок-схема программы
 
-<image src="10.png">
+<image src="images/10.png">
 
 # 3 Тесты
 

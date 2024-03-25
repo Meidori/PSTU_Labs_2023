@@ -46,7 +46,7 @@ int main() {
 
 # 2.2 Блок-схема программы 
 
-<image src="hanoi.png">
+<image src="images/hanoi.png">
 
 # 3 Тесты
 

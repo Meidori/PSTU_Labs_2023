@@ -102,7 +102,7 @@ void solve(int i) {
 
 # 2.2 Блок-схема программы
 
-<image src="queens.png">
+<image src="images/queens.png">
 
 # Работа программы
 

@@ -57,7 +57,7 @@ int main() {
 
 # 2.2 Блок-схема программы
 
-<image src="2.png">
+<image src="images/2.png">
 
 # 3 Тесты
 

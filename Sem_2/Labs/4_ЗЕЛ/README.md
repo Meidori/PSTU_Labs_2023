@@ -73,7 +73,7 @@ int main() {
 
 # 2.2 Блок-схема программы
 
-<image src="4_5.png">
+<image src="images/4_5.png">
 
 # 3 Тесты
 
