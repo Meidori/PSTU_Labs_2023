@@ -1,16 +1,15 @@
 #include <iostream>
-#include "timing.h"
 using namespace std;
 
 
 class timing {
     private:
-    int hours;
-    int seconds;
+    unsigned int hours;
+    unsigned int seconds;
     double mins;
 
     public:
-    timing(int constructor_hours = 0, int constructor_seconds = 0) {
+    timing(unsigned int constructor_hours = 0, unsigned int constructor_seconds = 0) {
         hours = constructor_hours;
         seconds = constructor_seconds;
     }
@@ -20,7 +19,7 @@ class timing {
     }
 
     int minutes() {
-        double mins = hours * 60 + double(seconds) / 60;
+        mins = hours * 60 + double(seconds) / 60;
         return mins;
     }
 
@@ -31,7 +30,7 @@ class timing {
 
 
 int main() {
-    int hours, mins;
+    unsigned int hours, mins;
     cout << "Введите часы и минуты (целые числа): ";
     cin >> hours >> mins;
     cout << endl;
