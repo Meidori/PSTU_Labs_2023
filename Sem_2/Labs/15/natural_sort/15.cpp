@@ -17,16 +17,12 @@ void print_array(int arr[], int size) {
 
 
 int main() {
-    int array_of_numbers[SIZE];
-    for (int i = 0; i < SIZE; i++) {
-        array_of_numbers[i] = 1 + rand() % 100;
-    }
-    array_of_numbers[24] = -1;
+    int array_of_numbers[SIZE] =  {56, 74, 95, 104, 13, 14, 1, 4, 7, 0, -1, 15, 34, 106, 23, 56, 17, 45, 76, 100, 34, 22, 25, 27, 75};
 
     std::cout << "Изначальный вид массива:" << std::endl;
     print_array(array_of_numbers, SIZE);
 
-    natural_sort(array_of_numbers, SIZE);
+    sort_series(array_of_numbers, SIZE);
 
     std::cout << "Вид массива после сортировки:" << std::endl;
     print_array(array_of_numbers, SIZE);
