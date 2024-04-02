@@ -3,12 +3,12 @@ using namespace std;
 
 
 class timing {
-    private:
+private:
     unsigned int hours;
     unsigned int seconds;
     double mins;
 
-    public:
+public:
     timing(unsigned int constructor_hours = 0, unsigned int constructor_seconds = 0) {
         hours = constructor_hours;
         seconds = constructor_seconds;
@@ -25,6 +25,26 @@ class timing {
 
     void show() {
         cout << hours << " часа(ов) + " << seconds << " секунд(ы) = " << mins << " минут.\n";
+    }
+
+    void set_hours(int hrs) {
+        hours = hrs;
+    }
+
+    void set_minutes(int scs) {
+        seconds = scs;
+    }
+
+    void get_hours() {
+        cout << hours << endl;
+    }
+
+    void get_seconds() {
+        cout << seconds << endl;
+    }
+
+    void get_minutes() {
+        cout << minutes << endl;
     }
 };
 
