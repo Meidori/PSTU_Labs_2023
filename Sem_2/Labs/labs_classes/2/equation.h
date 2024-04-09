@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 
 class Equation {
@@ -6,6 +7,7 @@ private:
     double coefficient_A;
     double coefficient_B;
     double coefficient_C;
+
 
 public:
     Equation(double A = 0, double B = 0, double C = 0) {
@@ -15,9 +17,17 @@ public:
     }
 
 
+    Equation(const Equation& equ) {
+        coefficient_A = equ.coefficient_A;
+        coefficient_B = equ.coefficient_B;
+        coefficient_C = equ.coefficient_C;
+    }
+
+
+
     ~Equation() {
-        std::cout << "Уравнение " << coefficient_A << "x^2 + " << coefficient_B << "x + " << coefficient_C << std::endl;
-        std::cout << "Удалено из памяти." << std::endl;
+        std::cout << "Уравнение " << coefficient_A << "x^2 + " << coefficient_B << "x + " << coefficient_C;
+        std::cout << " удалено из памяти." << std::endl;
     }
 
 
