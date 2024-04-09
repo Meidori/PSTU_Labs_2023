@@ -6,15 +6,22 @@ private:
     int minutes;
     int seconds;
 
+
 public:
-    Time(int mins = 0, int secs = 0) {
-        minutes = mins;
-        seconds = secs;
+    Time(int minutes = 0, int seconds = 0) {
+        this -> minutes = minutes;
+        this -> seconds = seconds;
         if (seconds >= 60) {
-            int extra_mins = seconds / 60;
-            seconds -= extra_mins * 60;
-            minutes += extra_mins;
+            int extra_mins = this -> seconds / 60;
+            this -> seconds -= extra_mins * 60;
+            this -> minutes += extra_mins;
         }
+    }
+
+
+    Time(const Time& time) {
+        minutes = time.minutes;
+        seconds = time.seconds;
     }
 
 
@@ -28,13 +35,13 @@ public:
     }
 
 
-    void set_mins(int mins) {
-        minutes = mins;
+    void set_mins(int minutes) {
+        this -> minutes = minutes;
     }
 
 
-    void set_secs(int secs) {
-        seconds = secs;
+    void set_secs(int seconds) {
+        this -> seconds = seconds;
     }
 
 
@@ -68,14 +75,18 @@ public:
     }
 
 
-    bool operator ==(const Time& time) const {
+    bool operator ==(const Time& time) {
         return (seconds == time.seconds) && (minutes == time.minutes);
     }
 
 
-    bool operator !=(const Time& time) const {
-        return (seconds != time.seconds) && (minutes != time.minutes);
+    bool operator !=(const Time& time) {
+        return (seconds != time.seconds) || (minutes != time.minutes);
     }
+
+
+    friend std::ostream& operator <<(std::ostream& out, Time time);
+    friend std::istream& operator >>(std::istream& in, Time& time);
 };
 
 
