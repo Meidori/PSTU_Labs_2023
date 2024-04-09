@@ -10,7 +10,7 @@ private:
 
 
 public:
-    Money(int rubles, int kopecks) : Pair() {
+    Money(int rubles = 0, int kopecks = 0) : Pair(rubles, kopecks) {
         this -> kopecks = kopecks % 100;
         this -> rubles = rubles + kopecks / 100;
     }
