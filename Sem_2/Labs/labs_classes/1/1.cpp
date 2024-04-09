@@ -2,20 +2,28 @@
 using namespace std;
 
 
-class timing {
+class Timing {
 private:
     unsigned int hours;
     unsigned int seconds;
     double mins;
 
+
 public:
-    timing(unsigned int constructor_hours = 0, unsigned int constructor_seconds = 0) {
-        hours = constructor_hours;
-        seconds = constructor_seconds;
+    Timing(unsigned int hours = 0, unsigned int seconds = 0) {
+        this -> hours = hours;
+        this -> seconds = seconds;
     }
 
-    ~timing() {
-        cout << "Объект, содержащий " << hours << " часов и " << mins << " минут, уничтожен.\n";
+
+    Timing(const Timing& time) {
+        hours = time.hours;
+        seconds = time.seconds;
+    }
+
+
+    ~Timing() {
+        cout << "Объект, содержащий " << hours << " часов и " << seconds << " секунд, уничтожен.\n";
     }
 
     int minutes() {
@@ -31,7 +39,7 @@ public:
         hours = hrs;
     }
 
-    void set_minutes(int scs) {
+    void set_seconds(int scs) {
         seconds = scs;
     }
 
@@ -44,18 +52,18 @@ public:
     }
 
     void get_minutes() {
-        cout << minutes << endl;
+        cout << mins << endl;
     }
 };
 
 
 int main() {
-    unsigned int hours, mins;
-    cout << "Введите часы и минуты (целые числа): ";
-    cin >> hours >> mins;
+    unsigned int hours, secs;
+    cout << "Введите часы и секунды (целые числа): ";
+    cin >> hours >> secs;
     cout << endl;
 
-    timing time1(hours, mins);
+    Timing time1(hours, secs);
     time1.minutes();
     time1.show();
 
