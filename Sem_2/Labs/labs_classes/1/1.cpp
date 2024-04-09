@@ -23,7 +23,7 @@ public:
 
 
     ~Timing() {
-        cout << "Объект, содержащий " << hours << " часов и " << seconds << " секунд, уничтожен.\n";
+        cout << "Объект, содержащий " << hours << " часа(ов) и " << seconds << " секунд(ы), уничтожен.\n";
     }
 
     int minutes() {
@@ -59,7 +59,7 @@ public:
 
 int main() {
     unsigned int hours, secs;
-    cout << "Введите часы и секунды (целые числа): ";
+    cout << "Введите два целых числа: часы и секунды: ";
     cin >> hours >> secs;
     cout << endl;
 
