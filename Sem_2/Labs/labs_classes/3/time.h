@@ -25,6 +25,9 @@ public:
     }
 
 
+    ~Time() {}
+
+
     int get_mins() {
         return minutes;
     }
