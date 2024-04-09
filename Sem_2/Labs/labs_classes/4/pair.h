@@ -9,28 +9,37 @@ private:
 
 
 public:
-    Pair (int first = 0, int second = 0) {
+    Pair(int first = 0, int second = 0) {
         this -> first = first;
         this -> second = second;
     }
+
+
+    Pair(const Pair& pair) {
+        first = pair.first;
+        second = pair.second;
+    }
+
+
+    virtual ~Pair() {}
     
 
-    void set_first(int f) {
+    virtual void set_first(int f) {
         first = f;
     }
 
 
-    void set_second(int s) {
+    virtual void set_second(int s) {
         second = s;
     }
 
 
-    int get_first() {
+    virtual int get_first() {
         return first;
     }
 
 
-    int get_second() {
+    virtual int get_second() {
         return second;
     }
 
@@ -50,11 +59,15 @@ public:
         second += pair.second;
         return Pair(first, second);
     }
+
+
+    friend std::ostream& operator <<(std::ostream& out, Pair& pair);
+    friend std::istream& operator >>(std::istream& in, Pair& pair);
 };
 
 
 std::ostream& operator <<(std::ostream& out, Pair& pair) {
-    out << pair.get_first() <<  "\t" << pair.get_second();
+    out << pair.get_first() <<  " " << pair.get_second();
     return out;
 }
 

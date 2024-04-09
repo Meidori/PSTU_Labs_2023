@@ -16,23 +16,42 @@ public:
     }
 
 
-    int get_rubles() {
+    Money(const Money& money) {
+        rubles = money.rubles;
+        kopecks = money.kopecks;
+    }
+
+
+    ~Money() {}
+
+
+    int get_first() {
         return rubles;
     }
 
 
-    int get_kopecks() {
+    int get_second() {
         return kopecks;
     }
 
 
-    void set_rubles(int rubles) {
+    void set_first(int rubles) {
         this -> rubles = rubles;
     }
 
 
-    void set_kopecks(int kopecks) {
+    void set_second(int kopecks) {
         this -> kopecks = kopecks;
+    }
+
+
+    Pair operator =(const Money& money) {
+        if (&money == this) {
+            return *this;
+        }
+        rubles = money.rubles;
+        kopecks = money.kopecks;
+        return *this;
     }
 
 
@@ -58,11 +77,15 @@ public:
         kopecks = kopecks % 100;
         return Money(rubles, kopecks);
     }
+
+
+    friend std::ostream& operator <<(std::ostream& out, Money& money);
+    friend std::istream& operator >>(std::istream& in, Money& money);
 };
 
 
 std::ostream& operator <<(std::ostream& out, Money& money) {
-    out << money.get_rubles() <<  "." << money.get_kopecks();
+    out << money.get_first() <<  " рублей(я) и " << money.get_second() << " копеек(ки).";
     return out;
 }
 
@@ -71,7 +94,9 @@ std::istream& operator >>(std::istream& in, Money& money) {
     int rub, kop;
     in >> rub;
     in >> kop;
-    money.set_rubles(rub);
-    money.set_kopecks(kop);
+    rub += kop / 100;
+    kop = kop % 100;
+    money.set_first(rub);
+    money.set_second(kop);
     return in;
 }
