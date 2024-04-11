@@ -1,43 +1,76 @@
 #pragma once
 
-void merge(int arr[], int left, int mid, int right) {
-    int index1 = 0;
-    int index2 = 0;
-    int merged_array[right - left];
 
-    while (left + index1 < mid && mid + index2 < right) {
-        if (arr[left + index1] < arr[mid + index2]) {
-            merged_array[index1 + index2] = arr[left + index1];
-            index1++;
+void merge(int merged[], int arr1[], int arr2[], int size1, int size2) {
+    int i = 0, j = 0, index = 0;
+    while (i < size1 && j < size2) {
+        if (arr1[i] <= arr2[j]) {
+            merged[index++] = arr1[i++];
         }
         else {
-            merged_array[index1 + index2] = arr[mid + index2];
-            index2++;
+            merged[index++] = arr2[j++];
         }
     }
 
-    while (left + index1 < mid) {
-        merged_array[index1 + index2] = arr[left + index1];
-        index1++;
+    while (i < size1) {
+        merged[index++] = arr1[i++];
     }
 
-    while (mid + index2 < right) {
-        merged_array[index1 + index2] = arr[mid + index2];
-        index2++;
-    }
-
-    for (int i = 0; i < index1 + index2; i++) {
-        arr[left + i] = merged_array[i];
+    while (j < size2) {
+        merged[index++] = arr2[j++];
     }
 }
 
-void merge_sort(int arr[], int left, int right) {
-    if (left + 1 >= right) {
-        return;
+
+void sort_series(int arr[], int size, int array_of_sizes[], int number_of_series, int array_index, int current_series) {
+    if (current_series + 1 >= number_of_series) {
+        current_series = 0;
+        array_index = 0;
     }
 
-    int mid = (left + right) / 2;
-    merge_sort(arr, left, mid);
-    merge_sort(arr, mid, right);
-    merge(arr, left, mid, right);
+    int memorize_index = array_index;
+    
+    int tmp_arr1[array_of_sizes[current_series]];
+    for (int i = 0; i < array_of_sizes[current_series]; i++) {
+        tmp_arr1[i] = arr[array_index++];
+    }
+    current_series++;
+
+    int tmp_arr2[array_of_sizes[current_series]];
+    for (int i = 0; i < array_of_sizes[current_series]; i++) {
+        tmp_arr2[i] = arr[array_index++];
+    }
+
+    int tmp_merged[array_of_sizes[current_series] + array_of_sizes[current_series - 1]];
+    merge(tmp_merged, tmp_arr1, tmp_arr2, array_of_sizes[current_series - 1], array_of_sizes[current_series]);
+
+    array_index = memorize_index;
+    for (int i = 0; i < array_of_sizes[current_series] + array_of_sizes[current_series - 1]; i++) {
+        arr[array_index++] = tmp_merged[i];
+    }
+    
+    int tmp = array_of_sizes[current_series - 1];
+    array_of_sizes[current_series - 1] = tmp + array_of_sizes[current_series];
+    for (int i = current_series; i < number_of_series - 1; i++) {
+        array_of_sizes[i] = array_of_sizes[i + 1];
+    }
+    array_of_sizes[number_of_series - 1] = 0;
+    number_of_series--;
+
+    if (number_of_series > 1) {
+        sort_series(arr, size, array_of_sizes, number_of_series, array_index, current_series);
+    }
 }
+
+
+void merge_sort(int arr[], int size) {
+    int array_of_sizes[size];
+    for (int i = 0; i < size; i++) {
+        array_of_sizes[i] = 1;
+    }
+    int number_of_series = size;
+    int array_index = 0;
+    int current_series = 0;
+    sort_series(arr, size, array_of_sizes, number_of_series, array_index, current_series);
+}
+
