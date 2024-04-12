@@ -1,9 +1,7 @@
 #include <iostream>
 #include <string>
+#include <ctime>
 #include "hashtable.h"
-
-
-const int HASH_TABLE_SIZE = 150;
 
 
 std::string names[40] = {"Агеева Мирослава Егоровна", "Антонов Александр Тимофеевич", "Антонов Вячеслав Савельевич", "Борисова Нина Егоровна", 
@@ -36,5 +34,57 @@ std::string adresses[40] = {"ул. Ленина, д. 40, г. Майкоп, Ре�
 
 
 int main() {
-    elem_of_table* table[HASH_TABLE_SIZE];
+    int amount_of_elements = 100;
+
+    int selector;
+    std::cout << "Выберите метод резрешения коллизии:\n1) метод открытой адрессации,\n2) метод цепочек." << std::endl;
+    std::cin >> selector;
+
+
+    switch (selector) {
+        case 1: {
+            hash_table hashmap_open_adressing;
+            hashmap_open_adressing.init();
+            elem_of_table data;
+
+            for (int i = 0; i < amount_of_elements; i++) {
+                data.name = names[std::rand() % 40];
+                data.passport = 1000000000 + std::rand() % 9999999999;
+                data.adress = adresses[std::rand() % 40];
+                
+                hashmap_open_adressing.add(&data);
+            }
+
+            hashmap_open_adressing.print_hash_table();
+
+            std::cout << "Количество коллизий: " << hashmap_open_adressing.collision_counter << ".\n";
+            std::cout << "Количество записей в таблице:" << hashmap_open_adressing.filled_part_counter << std::endl;
+            break;
+        }
+            
+        case 2: {
+            hash_table hashmap_separate_chaining;
+            hashmap_separate_chaining.init();
+            elem_of_table data;
+            
+            for (int i = 0; i < amount_of_elements; i++) {
+                data.name = names[std::rand() % 40];
+                data.passport = 1000000000 + std::rand() % 9999999999;
+                data.adress = adresses[std::rand() % 40];
+                
+                hashmap_separate_chaining.add(&data, 1);
+            }
+
+            
+
+            hashmap_separate_chaining.print_hash_table(1);
+
+            std::cout << "Количество коллизий: " << hashmap_separate_chaining.collision_counter << ".\n";
+            std::cout << "Количество записей в таблице:" << hashmap_separate_chaining.filled_part_counter << std::endl;
+            break;
+        }
+    
+        default:
+            break;
+    }
 }
