@@ -1,3 +1,60 @@
+Бакин Владислав Артемович
+
+ИВТ-23-1б
+
+# 5 Вариант задания
+
+Лабораторная работа № 9 - классы
+
+> Будет добавлено позже
+
+# 2.1 Код программы
+
+> 9_3.cpp
+```cpp
+#include <iostream>
+
+#include "vector.h"
+#include "error.h"
+
+
+int main() {
+    try {
+        Vector vect1(3);
+        std::cout << "vect1: ";
+        std::cout << vect1 << std::endl;
+
+        int index;
+        std::cout << "Index: ";
+        std::cin >> index;
+        std::cout << vect1[index] << std::endl;
+
+        int step;
+        std::cout << "Step: ";
+        std::cin >> step;
+
+        std::cout << "vect1 + step: ";
+        std::cout << vect1 + step << std::endl;
+
+        int size;
+        std::cout << "Введите размер вектора (MAX_SIZE = 30): ";
+        std::cin >> size;
+        Vector vect2(size);
+        std::cout << "vect2: ";
+        std::cout << vect2 << std::endl; 
+        
+    }
+    catch (Error& error) {
+        error.what();
+    }
+
+
+    return 0;
+}
+```
+
+> vector.h
+```cpp
 #pragma once
 #include <iostream>
 
@@ -22,7 +79,7 @@ public:
         this -> size = size;
         data = new int [size];
         for (int i = 0; i < size; i++) {
-            data[i] = i;
+            data[i] = 0;
         }
     }
 
@@ -124,3 +181,77 @@ std::istream& operator >> (std::istream& in, const Vector& vector) {
     return in;
     
 }
+```
+
+> error.h
+```cpp
+#pragma once
+#include <iostream>
+#include <string>
+
+
+class Error {
+public:
+    virtual void what() {};
+};
+
+
+class Index_Error : public Error {
+public:
+    Index_Error() {
+        error_message = "Index_Error";
+    }
+    
+
+    virtual void what() {
+        std::cout << error_message << std::endl;
+    }
+
+protected:
+    std::string error_message;
+};
+
+
+class Size_Error : public Error {
+public:
+    Size_Error() {
+        error_message = "Size_Error";
+    }
+    
+
+    virtual void what() {
+        std::cout << error_message << std::endl;
+    }
+
+protected:
+    std::string error_message;
+};
+
+
+class Step_Error : public Error {
+public:
+    Step_Error() {
+        error_message = "Step_Error";
+    }
+    
+
+    virtual void what() {
+        std::cout << error_message << std::endl;
+    }
+
+protected:
+    std::string error_message;
+};
+```
+
+# 2.2 UML
+
+# Пример работы
+
+```
+vect1: 0 1 2 
+Index: 100   
+Index_Error
+```
+
+# Вопросы

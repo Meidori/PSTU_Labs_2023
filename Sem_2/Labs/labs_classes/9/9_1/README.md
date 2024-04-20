@@ -1,7 +1,61 @@
-#pragma once
+Бакин Владислав Артемович
+
+ИВТ-23-1б
+
+# 5 Вариант задания
+
+Лабораторная работа № 9 - классы
+
+> Будет добавлено позже
+
+# 2.1 Код программы
+
+> 9_1.cpp
+```cpp
 #include <iostream>
 
-#include "error.h"
+#include "vector.h"
+
+
+int main() {
+    try {
+        Vector vect1(3);
+        std::cout << "vect1: ";
+        std::cout << vect1 << std::endl;
+
+        int index;
+        std::cout << "Index: ";
+        std::cin >> index;
+        std::cout << vect1[index] << std::endl;
+
+        int step;
+        std::cout << "Step: ";
+        std::cin >> step;
+
+        std::cout << "vect1 + step: ";
+        std::cout << vect1 + step << std::endl;
+
+        int size;
+        std::cout << "Введите размер вектора (MAX_SIZE = 30): ";
+        std::cin >> size;
+        Vector vect2(size);
+        std::cout << "vect2: ";
+        std::cout << vect2 << std::endl; 
+        
+    }
+    catch (int) {
+        std::cout << "Error" << std::endl;
+    }
+
+
+    return 0;
+}
+```
+
+> vector.h
+```cpp
+#pragma once
+#include <iostream>
 
 
 const int MAX_SIZE = 30;    // максимальный размер вектора для генерации исключительных ситуаций
@@ -17,12 +71,12 @@ public:
 
     Vector(int size) {
         if (size > MAX_SIZE) {
-            throw Size_Error();
+            throw 1;
         }
         this -> size = size;
         data = new int [size];
         for (int i = 0; i < size; i++) {
-            data[i] = i;
+            data[i] = 0;
         }
     }
 
@@ -38,7 +92,7 @@ public:
 
     Vector(int size, int* arr) {
         if (size > MAX_SIZE) {
-            throw Size_Error();
+            throw 1;
         }
         this -> size = size;
         data = new int [size];
@@ -70,10 +124,10 @@ public:
 
     int operator [] (int index) {
         if (index < 0) {
-            throw Index_Error();
+            throw 2;
         }
         if (index >= size) {
-            throw Index_Error();
+            throw 3;
         }
 
         return data[index];
@@ -82,7 +136,7 @@ public:
 
     int operator + (int step) {
         if (size + step > MAX_SIZE) {
-            throw Step_Error();
+            throw 4;
         }
         int* ptr = data;
         return *(ptr + step);
@@ -124,3 +178,20 @@ std::istream& operator >> (std::istream& in, const Vector& vector) {
     return in;
     
 }
+```
+
+# 2.2 UML
+
+# Пример работы
+
+```
+vect1: 0 1 2 
+Index: 1     
+1     
+Step: 1
+vect1 + step: 1
+Введите размер вектора (MAX_SIZE = 30): 40
+Error
+```
+
+# Вопросы
