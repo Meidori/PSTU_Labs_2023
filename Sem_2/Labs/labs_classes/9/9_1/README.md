@@ -182,6 +182,8 @@ std::istream& operator >> (std::istream& in, const Vector& vector) {
 
 # 2.2 UML
 
+<image src = "9_1.png">
+
 # Пример работы
 
 ```

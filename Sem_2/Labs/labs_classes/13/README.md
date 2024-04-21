@@ -473,6 +473,8 @@ std::vector<Time> remove_more_average(std::vector<Time> vector_of_time) {
 
 # 2.2 UML
 
+<image src = "13.png">
+
 # Пример работы
 
 ```

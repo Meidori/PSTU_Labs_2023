@@ -243,6 +243,8 @@ std::istream& operator >>(std::istream& in, Vector& vect) {
 
 # 2.2 UML
 
+<image src = "6.png">
+
 # Пример работы
 
 ```

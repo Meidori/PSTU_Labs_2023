@@ -339,6 +339,8 @@ std::ostream& operator <<(std::ostream& out, const Vector& v) {
 
 # 2.2 UML
 
+<image src = "5.png">
+
 # Пример работы
 
 ```

@@ -470,6 +470,8 @@ protected:
 
 # 2.2 UML
 
+<image src = "8.png">
+
 # Пример работы
 
 ```

@@ -233,6 +233,8 @@ private:
 
 # 2.2 UML
 
+<image src = "7.png">
+
 # Пример работы
 
 ```

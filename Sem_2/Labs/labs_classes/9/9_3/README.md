@@ -246,6 +246,8 @@ protected:
 
 # 2.2 UML
 
+<image src = "9_3.png">
+
 # Пример работы
 
 ```

@@ -249,6 +249,8 @@ std::istream& operator >>(std::istream& in, Money& money) {
 
 # 2.2 UML
 
+<image src = "4.png">
+
 # Пример работы
 
 ```

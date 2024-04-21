@@ -87,6 +87,8 @@ int main() {
 
 # 2.2 UML
 
+<image src="1.png">
+
 # Пример работы
 
 ```

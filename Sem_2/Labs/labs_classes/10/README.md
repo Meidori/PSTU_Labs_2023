@@ -435,6 +435,8 @@ int value_increase(const char* file_name, Time target, int seconds) {
 
 # 2.2 UML
 
+<image src = "10.png">
+
 # Пример работы
 
 ```

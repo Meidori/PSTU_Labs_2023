@@ -161,6 +161,8 @@ std::istream& operator >>(std::istream& in, Time& time) {
 
 # 2.2 UML
 
+<image src = "3.png">
+
 # Пример работы
 
 ```
