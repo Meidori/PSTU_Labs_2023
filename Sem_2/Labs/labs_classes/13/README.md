@@ -556,5 +556,3 @@ add_max_elem_to_all:
 set_of_time:
 21:20
 ```
-
-# Вопросы
