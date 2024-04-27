@@ -3,8 +3,9 @@
 #include "binary_tree.h"
 
 
-int main() {
-    Binary_Tree tree;
+int main() 
+{
+    BinaryTree tree;
     
 
     return 0;
