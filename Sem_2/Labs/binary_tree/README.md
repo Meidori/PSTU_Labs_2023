@@ -14,4 +14,4 @@
 
 # 3 Демонстрация работы
 
-<video src="vids/vid.mp4">
+https://github.com/Meidori/PSTU_Labs_2023/assets/86147868/c13b535d-e5df-4090-a2aa-622fc825795b
