@@ -14,4 +14,4 @@
 
 # 3 Демонстрация работы
 
-<video src="vids/vid.mp4">
+<video src="vids/vid.mp4" controls></video>
