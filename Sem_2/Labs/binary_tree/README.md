@@ -14,5 +14,4 @@
 
 # 3 Демонстрация работы
 
-![](vids/vid.webm)
-
+<video src="vids/vid.mp4">
