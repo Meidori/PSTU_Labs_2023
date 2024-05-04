@@ -19,12 +19,17 @@ class GraphGenerator : public QMainWindow
 
 public:
     GraphGenerator(QWidget *parent = nullptr);
-    void printArrows();
     ~GraphGenerator();
+
+    void removeCurEllipses();
+    void removeCurGroups();
 
 public slots:
     void addNode();
+    // bool eventFilter(QObject *object, QEvent *event);
+    // void updateNodePosition(QGraphicsItemGroup *group);
     void addEdge();
+    void updateArrows();
 
 private:
     Graph graph;

@@ -116,6 +116,21 @@ QGraphicsItemGroup** Graph::getMatrixOfGroups() const
     return matrixOfGroups;
 }
 
+void Graph::updateMatrixOfGroups(int index, QGraphicsItemGroup* group)
+{
+    matrixOfGroups[index] = group;
+}
+
+void Graph::updateMatrixOfEllipses(int index, QGraphicsEllipseItem* node)
+{
+    matrixOfEllipses[index] = node;
+}
+
+std::vector<QGraphicsItemGroup*> Graph::getVectorOfArrows()
+{
+    return vectorOfArrows;
+}
+
 void Graph::addEdge(int from, int to, int weight) const
 {
     matrix[to][from] = weight;
@@ -154,5 +169,4 @@ Graph::~Graph()
         delete[] matrixOfGroups[i];
     }
     delete[] matrixOfGroups;
-
 }

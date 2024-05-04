@@ -27,12 +27,5 @@ void AddNewEdgeWindow::addNewEdge()
     int weight = weightLine.toInt();
     m_graph.addEdge(from, to, weight);
 
-    QGraphicsItemGroup** matrixOfGroups = m_graph.getMatrixOfGroups();
-    QGraphicsItemGroup* groupFrom = matrixOfGroups[from];
-    QGraphicsItemGroup* groupTo = matrixOfGroups[to];
-
-    QPointF fromCenter = groupFrom->boundingRect().center();
-    QPointF toCenter = groupTo->boundingRect().center();
-
     close();
 }

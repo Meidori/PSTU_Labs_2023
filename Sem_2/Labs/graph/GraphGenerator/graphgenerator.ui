@@ -50,7 +50,7 @@
      <string>Add edge</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="delObjectBtn">
+   <widget class="QPushButton" name="updateArrowsBtn">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -65,7 +65,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Delete object</string>
+     <string>Update arrows</string>
     </property>
    </widget>
    <widget class="QGraphicsView" name="printGraph">
@@ -76,6 +76,24 @@
       <width>1180</width>
       <height>920</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deleteBtn">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>280</y>
+      <width>200</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Delete</string>
     </property>
    </widget>
   </widget>
