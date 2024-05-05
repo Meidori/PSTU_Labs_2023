@@ -94,11 +94,76 @@ void Graph::addNodeOnLastPos(QGraphicsEllipseItem* node, QGraphicsItemGroup* gro
 {
     matrix[0][sizeOfMatrix - 1] = curSerialNumber;
     matrix[sizeOfMatrix - 1][0] = curSerialNumber;
-    // matrix[sizeOfMatrix - 1][sizeOfMatrix - 1] = 0;
 
-    matrixOfEllipses[curSerialNumber] = node;
+    matrixOfEllipses[sizeOfMatrix - 1] = node;
+    matrixOfGroups[sizeOfMatrix - 1] = group;
+}
 
-    matrixOfGroups[curSerialNumber] = group;
+void Graph::delNode(int number)
+{
+    int curSize = getSize();
+
+    // Удаление строки и столбца
+    for (int i = number; i < curSize - 1; ++i)
+    {
+        for (int j = 0; j < curSize - 1; ++j)
+        {
+            // Сдвигаем элементы влево и вверх
+            if (i < number || j < number)
+                matrix[i][j] = matrix[i][j];
+            else
+                matrix[i][j] = matrix[i + 1][j + 1];
+        }
+    }
+
+    int** newMatrix = new int*[curSize - 1];
+    for (int i = 0; i < curSize - 1; ++i)
+    {
+        newMatrix[i] = new int[curSize - 1];
+    }
+
+    for (int i = 0; i < curSize - 1; ++i)
+    {
+        for (int j = 0; j < curSize - 1; ++j)
+        {
+            newMatrix[i][j] = matrix[i][j];
+        }
+    }
+
+    delete[] matrix;
+    matrix = newMatrix;
+
+    // Обновляем массивы групп и эллипсов
+    QGraphicsEllipseItem** newMatrixOfEllipses = new QGraphicsEllipseItem*[curSize - 1];
+    QGraphicsItemGroup** newMatrixOfGroups = new QGraphicsItemGroup*[curSize - 1];
+
+    for (int i = 0; i < number; ++i)
+    {
+        newMatrixOfEllipses[i] = matrixOfEllipses[i];
+        newMatrixOfGroups[i] = matrixOfGroups[i];
+    }
+
+    for (int i = number + 1; i < curSize; ++i)
+    {
+        newMatrixOfEllipses[i - 1] = matrixOfEllipses[i];
+        newMatrixOfGroups[i - 1] = matrixOfGroups[i];
+    }
+
+    delete[] matrixOfEllipses;
+    delete[] matrixOfGroups;
+
+    matrixOfEllipses = newMatrixOfEllipses;
+    matrixOfGroups = newMatrixOfGroups;
+
+    sizeOfMatrix--;
+    curSerialNumber--;
+
+    // Обновляем матрицу индексов
+    for (int i = 0; i < sizeOfMatrix; ++i)
+    {
+        matrix[0][i] = i;
+        matrix[i][0] = i;
+    }
 }
 
 QGraphicsEllipseItem** Graph::getMatrixOfEllipses()

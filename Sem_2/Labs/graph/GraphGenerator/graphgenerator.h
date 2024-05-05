@@ -25,9 +25,11 @@ public:
 
 public slots:
     void addNode();
-    void delEdge();
+    void delNode();
+    void updateSerialNumbers();
     bool eventFilter(QObject *object, QEvent *event);
     void addEdge();
+    void delEdge();
     void updateArrows();
 
 private:

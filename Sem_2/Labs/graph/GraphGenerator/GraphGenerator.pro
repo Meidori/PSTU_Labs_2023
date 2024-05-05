@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     addnewedgewindow.cpp \
     deleteedgewindow.cpp \
+    deletenodewindow.cpp \
     graph.cpp \
     main.cpp \
     graphgenerator.cpp
@@ -18,12 +19,14 @@ SOURCES += \
 HEADERS += \
     addnewedgewindow.h \
     deleteedgewindow.h \
+    deletenodewindow.h \
     graph.h \
     graphgenerator.h
 
 FORMS += \
     addnewedgewindow.ui \
     deleteedgewindow.ui \
+    deletenodewindow.ui \
     graphgenerator.ui
 
 # Default rules for deployment.

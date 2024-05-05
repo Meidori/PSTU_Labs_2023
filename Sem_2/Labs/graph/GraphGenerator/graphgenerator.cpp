@@ -4,6 +4,8 @@
 #include "ui_addnewedgewindow.h"
 #include "deleteedgewindow.h"
 #include "ui_deleteedgewindow.h"
+#include "deletenodewindow.h"
+#include "ui_deletenodewindow.h"
 #include "graph.h"
 
 #include <QDebug>
@@ -33,6 +35,8 @@ GraphGenerator::GraphGenerator(QWidget *parent)
     connect(ui->updateArrowsBtn, SIGNAL(clicked()), this, SLOT(updateArrows()));
 
     connect(ui->deleteEdgeBtn, SIGNAL(clicked()), this, SLOT(delEdge()));
+
+    connect(ui->deleteNodeBtn, SIGNAL(clicked()), this, SLOT(delNode()));
 }
 
 void GraphGenerator::addNode()
@@ -61,7 +65,37 @@ void GraphGenerator::addNode()
     graph.addNodeOnLastPos(node, group);
     graph.increaseSerialNumber();
 
-    // graph.printMatrix();
+    graph.printMatrix();
+}
+
+void GraphGenerator::delNode()
+{
+    DeleteNodeWindow DeleteNodeWindow(graph, scene, printGraph, graph.getMatrixOfGroups());
+    DeleteNodeWindow.setModal(true);
+    DeleteNodeWindow.exec();
+
+    updateArrows();
+    updateSerialNumbers();
+
+    graph.printMatrix();
+}
+
+void GraphGenerator::updateSerialNumbers()
+{
+    int size = graph.getSize();
+    QGraphicsItemGroup** groups = graph.getMatrixOfGroups();
+    for (int i = 1; i < size; i++)
+    {
+        foreach (QGraphicsItem *item, groups[i]->childItems())
+        {
+            QGraphicsTextItem *textItem = qgraphicsitem_cast<QGraphicsTextItem*>(item);
+            if (textItem)
+            {
+                textItem->setPlainText(QString::number(i));
+            }
+        }
+    }
+    scene->update();
 }
 
 bool GraphGenerator::eventFilter(QObject *watched, QEvent *event)
@@ -223,7 +257,11 @@ void GraphGenerator::updateArrows()
             }
             else if (matrix[i][j] > 0 && matrix[j][i] > 0 && matrix[i][j] != matrix[j][i])
             {
-                // потом
+                // потом для разных весов между двумя матрицами
+            }
+            else // if ...
+            {
+                // потом для цикла
             }
         }
     }
