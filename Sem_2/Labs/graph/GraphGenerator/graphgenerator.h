@@ -21,13 +21,12 @@ public:
     GraphGenerator(QWidget *parent = nullptr);
     ~GraphGenerator();
 
-    void removeCurEllipses();
-    void removeCurGroups();
+    QPolygonF createArrowHead(const QPointF& startPoint, const QPointF& endPoint);
 
 public slots:
     void addNode();
-    // bool eventFilter(QObject *object, QEvent *event);
-    // void updateNodePosition(QGraphicsItemGroup *group);
+    void delEdge();
+    bool eventFilter(QObject *object, QEvent *event);
     void addEdge();
     void updateArrows();
 

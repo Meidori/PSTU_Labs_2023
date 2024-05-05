@@ -10,17 +10,20 @@ CONFIG += c++11
 
 SOURCES += \
     addnewedgewindow.cpp \
+    deleteedgewindow.cpp \
     graph.cpp \
     main.cpp \
     graphgenerator.cpp
 
 HEADERS += \
     addnewedgewindow.h \
+    deleteedgewindow.h \
     graph.h \
     graphgenerator.h
 
 FORMS += \
     addnewedgewindow.ui \
+    deleteedgewindow.ui \
     graphgenerator.ui
 
 # Default rules for deployment.

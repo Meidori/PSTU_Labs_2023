@@ -126,14 +126,24 @@ void Graph::updateMatrixOfEllipses(int index, QGraphicsEllipseItem* node)
     matrixOfEllipses[index] = node;
 }
 
-std::vector<QGraphicsItemGroup*> Graph::getVectorOfArrows()
+std::vector<QGraphicsItemGroup*>& Graph::getVectorOfArrows()
 {
     return vectorOfArrows;
+}
+
+void Graph::updateVector(std::vector<QGraphicsItemGroup*>& vect)
+{
+    vectorOfArrows = vect;
 }
 
 void Graph::addEdge(int from, int to, int weight) const
 {
     matrix[to][from] = weight;
+}
+
+void Graph::delEdge(int from, int to) const
+{
+    matrix[to][from] = 0;
 }
 
 void Graph::printMatrix()

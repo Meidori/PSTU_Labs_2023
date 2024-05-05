@@ -2,6 +2,8 @@
 #include "ui_graphgenerator.h"
 #include "addnewedgewindow.h"
 #include "ui_addnewedgewindow.h"
+#include "deleteedgewindow.h"
+#include "ui_deleteedgewindow.h"
 #include "graph.h"
 
 #include <QDebug>
@@ -11,6 +13,7 @@
 #include <QMouseEvent>
 #include <QGraphicsItemGroup>
 #include <QtMath>
+#include <QPolygonF>
 
 GraphGenerator::GraphGenerator(QWidget *parent)
     : QMainWindow(parent)
@@ -28,6 +31,8 @@ GraphGenerator::GraphGenerator(QWidget *parent)
     connect(ui->addEdgeBtn, SIGNAL(clicked()), this, SLOT(addEdge()));
 
     connect(ui->updateArrowsBtn, SIGNAL(clicked()), this, SLOT(updateArrows()));
+
+    connect(ui->deleteEdgeBtn, SIGNAL(clicked()), this, SLOT(delEdge()));
 }
 
 void GraphGenerator::addNode()
@@ -58,25 +63,7 @@ void GraphGenerator::addNode()
 
     // graph.printMatrix();
 }
-/*
- * lkdfgnkjlfdnggkjdsnsd;ds/dsfg'
- * dfgsdZV
- * fgZDF
- * dssfdZFD
- * KDSF;KLFJADLKFJSKLKDASLFSK;LADKSFAK
- * fgdSFDSDAL;FSADKLASDLFSKFALSADFSF
- * dfgGFBSFDGHFGHGDJGHDJGXDFVSDFZ
- * gdsSADFSFDAFDSASDFADFGAHFGJGHKGHKHJ
- * gdfsCGHGDZDZFSDVSFSDDВЫАЫАЯМЧ
- * dfgSFDDSAFSDFBSYUTUTURTERFVSDCZX
- * gdfFDVGJES;hjeFDJZJSNVJKZDBJK
- * dXCVZXLKVNKZNDRV<DV
- * gdsSZDVDSZVZDFVDZVDVF
- * dVFDZVDFZVDFFVDVZDZVDVDVZDVDZ
- * gsDZFVZDFVDFV
- * gdZDFVDVD
- * gVZDVDF
- * ..........
+
 bool GraphGenerator::eventFilter(QObject *watched, QEvent *event)
 {
     if (watched == scene && event->type() == QEvent::GraphicsSceneMouseMove)
@@ -92,7 +79,7 @@ bool GraphGenerator::eventFilter(QObject *watched, QEvent *event)
                 if (item && item->type() == QGraphicsItemGroup::Type)
                 {
                     QGraphicsItemGroup *group = qgraphicsitem_cast<QGraphicsItemGroup *>(item);
-                    updateNodePosition(group);  // меняем pos
+                    updateArrows();  // меняем стрелки
                     return true;
                 }
             }
@@ -102,61 +89,24 @@ bool GraphGenerator::eventFilter(QObject *watched, QEvent *event)
     return QObject::eventFilter(watched, event);
 }
 
-
-void GraphGenerator::updateNodePosition(QGraphicsItemGroup *group)
-{
-    // qDebug() << "updateNodePosition";
-    if (group)
-    {
-        qDebug() << "group: " << group;
-        QGraphicsTextItem* serialNumberItem = nullptr;
-        QGraphicsEllipseItem* node = nullptr;
-
-        // Поиск текстового элемента и эллипса в группе
-        foreach (QGraphicsItem *item, group->childItems())
-        {
-            if (QGraphicsTextItem *textItem = qgraphicsitem_cast<QGraphicsTextItem*>(item))
-            {
-                serialNumberItem = textItem;
-            }
-            else if (QGraphicsEllipseItem *ellipseItem = qgraphicsitem_cast<QGraphicsEllipseItem*>(item))
-            {
-                node = ellipseItem;
-            }
-        }
-
-        qDebug() << "serialNumberItem:" << serialNumberItem;
-        qDebug() << "node:" << node;
-
-        // Проверка, что найдены и текстовый элемент, и эллипс
-        if (serialNumberItem && node)
-        {
-            // Получение порядкого номера из текстового элемента
-            QString serialNumberQS = serialNumberItem->toPlainText();
-            int serialNumber = serialNumberQS.toInt();
-
-            // Обновление матрицы для эллипса и группы
-            QPointF textItemPos = group->pos() + QPointF(node->boundingRect().center().x() - serialNumberItem->boundingRect().width() / 2,
-                                                           node->boundingRect().center().y() - serialNumberItem->boundingRect().height() / 2);
-            serialNumberItem->setPos(textItemPos);
-
-            // Обновление позиции эллипса
-            QPointF ellipsePos = group->pos();
-            node->setPos(ellipsePos);
-
-            graph.updateMatrixOfGroups(serialNumber, group);
-            graph.updateMatrixOfEllipses(serialNumber, node);
-        }
-    }
-}
-*/
 void GraphGenerator::addEdge()
 {
     AddNewEdgeWindow addEdgeWindow(graph);
     addEdgeWindow.setModal(true);
     addEdgeWindow.exec();
 
-    // updateArrows();
+    updateArrows();
+
+    graph.printMatrix();
+}
+
+void GraphGenerator::delEdge()
+{
+    DeleteEdgeWindow delEdgeWindow(graph);
+    delEdgeWindow.setModal(true);
+    delEdgeWindow.exec();
+
+    updateArrows();
 
     graph.printMatrix();
 }
@@ -170,12 +120,8 @@ void GraphGenerator::updateArrows()
 
     for (int i = 0; i < vectorOfArrows.size(); i++)
     {
-        tmp = vectorOfArrows[i];
-        for (auto item : tmp->childItems())
-        {
-            scene->removeItem(item);    // удаляем нарисованные линни/стрелки
-        }
-        delete tmp;
+        scene->removeItem(vectorOfArrows[i]); // Удаляем группы со сцены
+        delete vectorOfArrows[i]; // Освобождаем память
     }
     vectorOfArrows.clear();
 
@@ -209,44 +155,104 @@ void GraphGenerator::updateArrows()
 
                 vectorOfArrows.push_back(group);
             }
+            else if (matrix[i][j] > 0 && matrix[j][i] == 0)
+            {
+                QPointF center1 = matrixOfGroups[i]->mapToScene(matrixOfGroups[i]->boundingRect().center());
+                QPointF center2 = matrixOfGroups[j]->mapToScene(matrixOfGroups[j]->boundingRect().center());
+
+                qDebug() << center1;
+                qDebug() << center2;
+
+                qreal angle = qAtan2(center2.y() - center1.y(), center2.x() - center1.x());     // Находим угол между двумя центрами эллипсов
+
+                // Вычисляем новые координаты начальной и конечной точек линии с учетом укорочения на 32 пикселя
+                QPointF newStart(center1.x() + 32 * qCos(angle), center1.y() + 32 * qSin(angle));
+                QPointF newEnd(center2.x() - 32 * qCos(angle), center2.y() - 32 * qSin(angle));
+
+                QGraphicsLineItem *line = new QGraphicsLineItem();    // линия между эллипсами
+                line->setLine(QLineF(newStart, newEnd));
+
+                // Создаем стрелковые концы линии
+                QPolygonF arrowHead = createArrowHead(newEnd, newStart);
+                QGraphicsPolygonItem *arrow = new QGraphicsPolygonItem(arrowHead);
+                arrow->setBrush(Qt::black);
+                arrow->setPen(Qt::NoPen);
+
+                QPointF textPos((center1.x() + center2.x()) / 2, (center1.y() + center2.y()) / 2);          // позиция текста веса на центре линии
+                QGraphicsTextItem* textItem = scene->addText(QString::number(matrix[i][j]));            // текст веса на центре линии
+                textItem->setPos(textPos);
+
+                QList<QGraphicsItem*> items;
+                items << line << textItem << arrow;
+                QGraphicsItemGroup *group = scene->createItemGroup(items);          // добавляем в группу линию и вес
+
+                vectorOfArrows.push_back(group);
+            }
+            else if (matrix[j][i] > 0 && matrix[i][j] == 0)
+            {
+                QPointF center1 = matrixOfGroups[i]->mapToScene(matrixOfGroups[i]->boundingRect().center());
+                QPointF center2 = matrixOfGroups[j]->mapToScene(matrixOfGroups[j]->boundingRect().center());
+
+                qDebug() << center1;
+                qDebug() << center2;
+
+                qreal angle = qAtan2(center2.y() - center1.y(), center2.x() - center1.x());     // Находим угол между двумя центрами эллипсов
+
+                // Вычисляем новые координаты начальной и конечной точек линии с учетом укорочения на 32 пикселя
+                QPointF newStart(center1.x() + 32 * qCos(angle), center1.y() + 32 * qSin(angle));
+                QPointF newEnd(center2.x() - 32 * qCos(angle), center2.y() - 32 * qSin(angle));
+
+                QGraphicsLineItem *line = new QGraphicsLineItem();    // линия между эллипсами
+                line->setLine(QLineF(newStart, newEnd));
+
+                // Создаем стрелковые концы линии
+                QPolygonF arrowHead = createArrowHead(newStart, newEnd);
+                QGraphicsPolygonItem *arrow = new QGraphicsPolygonItem(arrowHead);
+                arrow->setBrush(Qt::black);
+                arrow->setPen(Qt::NoPen);
+
+                QPointF textPos((center1.x() + center2.x()) / 2, (center1.y() + center2.y()) / 2);          // позиция текста веса на центре линии
+                QGraphicsTextItem* textItem = scene->addText(QString::number(matrix[j][i]));            // текст веса на центре линии
+                textItem->setPos(textPos);
+
+                QList<QGraphicsItem*> items;
+                items << line << textItem << arrow;
+                QGraphicsItemGroup *group = scene->createItemGroup(items);          // добавляем в группу линию и вес
+
+                vectorOfArrows.push_back(group);
+            }
+            else if (matrix[i][j] > 0 && matrix[j][i] > 0 && matrix[i][j] != matrix[j][i])
+            {
+                // потом
+            }
         }
     }
+    graph.updateVector(vectorOfArrows);
+}
+
+QPolygonF GraphGenerator::createArrowHead(const QPointF& startPoint, const QPointF& endPoint) {
+    QPolygonF arrowHead;
+
+    // Рассчитываем угол между горизонтальной линией и линией между startPoint и endPoint
+    qreal angle = qAtan2(endPoint.y() - startPoint.y(), endPoint.x() - startPoint.x());
+    // Длина стрелки
+    qreal arrowLength = 10.0; // Измените это значение по вашему усмотрению
+
+    // Угол стрелки с горизонтальной линией (половина угла)
+    qreal arrowAngle = M_PI / 6.0; // 30 градусов
+
+    // Координаты точек стрелки
+    QPointF arrowP1 = endPoint - QPointF(arrowLength * std::cos(angle + arrowAngle), arrowLength * std::sin(angle + arrowAngle));
+    QPointF arrowP2 = endPoint - QPointF(arrowLength * std::cos(angle - arrowAngle), arrowLength * std::sin(angle - arrowAngle));
+
+    // Добавляем точки в полигон стрелки
+    arrowHead << endPoint << arrowP1 << arrowP2;
+
+    return arrowHead;
 }
 
 GraphGenerator::~GraphGenerator()
 {
     delete scene;
     delete ui;
-}
-
-void GraphGenerator::removeCurEllipses()
-{
-    QGraphicsEllipseItem* ellipse;
-    QGraphicsEllipseItem** ellipses = graph.getMatrixOfEllipses();
-
-    for (int i = 0; i < graph.getSize(); i++)
-    {
-        ellipse = ellipses[i];
-        if (ellipse)
-        {
-            qDebug() << ellipse;
-            scene->removeItem(ellipse);
-        }
-    }
-}
-
-void GraphGenerator::removeCurGroups()
-{
-    QGraphicsItemGroup* group;
-    QGraphicsItemGroup** groups = graph.getMatrixOfGroups();
-
-    for (int i = 0; i < graph.getSize(); i++)
-    {
-        group = groups[i];
-        if (group)
-        {
-            qDebug() << group;
-            scene->removeItem(group);
-        }
-    }
 }

@@ -26,11 +26,13 @@ public:
     void addNodeOnLastPos(QGraphicsEllipseItem*, QGraphicsItemGroup*);
     QGraphicsEllipseItem** getMatrixOfEllipses();
     int** getMatrix();
-    std::vector<QGraphicsItemGroup*> getVectorOfArrows();
+    std::vector<QGraphicsItemGroup*>& getVectorOfArrows();
+    void updateVector(std::vector<QGraphicsItemGroup*>&);
     QGraphicsItemGroup** getMatrixOfGroups() const;
     void updateMatrixOfGroups(int index, QGraphicsItemGroup* group);
     void updateMatrixOfEllipses(int index, QGraphicsEllipseItem* node);
     void addEdge(int from, int to, int weight) const;
+    void delEdge(int from, int to) const;
     void printMatrix();
     ~Graph();
 };

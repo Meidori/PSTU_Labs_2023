@@ -78,7 +78,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="deleteBtn">
+   <widget class="QPushButton" name="deleteNodeBtn">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -93,7 +93,25 @@
      </font>
     </property>
     <property name="text">
-     <string>Delete</string>
+     <string>Delete node</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deleteEdgeBtn">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>370</y>
+      <width>200</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Delete edge</string>
     </property>
    </widget>
   </widget>
