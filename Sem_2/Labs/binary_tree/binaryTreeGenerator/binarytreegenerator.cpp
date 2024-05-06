@@ -43,6 +43,7 @@ void BinaryTreeGenerator::addNode() {
 
 void BinaryTreeGenerator::traverseAndPrintBase()
 {
+    tree.coordCalculation(tree.getTop());
     scene->clear();
     Node* root = tree.getTop();
     traverseAndPrint(root, tree);
@@ -52,7 +53,9 @@ void BinaryTreeGenerator::traverseAndPrintPBBT()
 {
     scene->clear();
     PBBT = tree.regenerateToPBBT();
-    if (PBBT.isEmpty()) {
+    PBBT.coordCalculation(PBBT.getTop());
+    if (PBBT.isEmpty())
+    {
         qDebug() << "PBBT is empty!";
         return;
     }
@@ -67,20 +70,21 @@ void BinaryTreeGenerator::traverseAndPrint(Node* root, BinaryTree& tree)
         traverseAndPrint(root->ptrToLeft, tree);
 
         QString node = QString::fromLatin1(&(root->key), 1);
-        QGraphicsEllipseItem *ellipse = scene->addEllipse(root->x, root->y, 50, 50, QPen(Qt::black), QBrush(Qt::white));
+        QGraphicsEllipseItem *ellipse = scene->addEllipse(root->x, root->y, 64, 64, QPen(Qt::black), QBrush(Qt::lightGray));
         QGraphicsTextItem *textItem = scene->addText(node);
         textItem->setPos(ellipse->boundingRect().center().x() - textItem->boundingRect().width() / 2,
                          ellipse->boundingRect().center().y() - textItem->boundingRect().height() / 2);
 
-        if (!tree.isEmpty() && tree.hasParent(root->key) && root->ptrToParent != nullptr) {
+        if (!tree.isEmpty() && tree.hasParent(root->key) && root->ptrToParent != nullptr)
+        {
             double parentX = root->ptrToParent->x;
             double parentY = root->ptrToParent->y;
             double currentNodeX = root->x;
             double currentNodeY = root->y;
 
             // Найдем центры эллипсов
-            QPointF parentCenter(parentX + 25, parentY + 25); // 25 - это половина ширины/высоты эллипса
-            QPointF currentNodeCenter(currentNodeX + 25, currentNodeY + 25);
+            QPointF parentCenter(parentX + 32, parentY + 32); // 32 - это половина ширины/высоты эллипса
+            QPointF currentNodeCenter(currentNodeX + 32, currentNodeY + 32);
 
             // Создаем линию между центрами эллипсов
             scene->addLine(parentCenter.x(), parentCenter.y(), currentNodeCenter.x(), currentNodeCenter.y(), QPen(Qt::black));
@@ -91,19 +95,22 @@ void BinaryTreeGenerator::traverseAndPrint(Node* root, BinaryTree& tree)
     }
 }
 
-void BinaryTreeGenerator::printMaxNode() {
+void BinaryTreeGenerator::printMaxNode()
+{
     char node = tree.getMax();
     QString maxNode = QString::fromLatin1(&node, 1);
     ui->maxValueLabel->setText(maxNode);
 }
 
-void BinaryTreeGenerator::printMinNode() {
+void BinaryTreeGenerator::printMinNode()
+{
     char node = tree.getMin();
     QString minNode = QString::fromLatin1(&node, 1);
     ui->minValueLabel->setText(minNode);
 }
 
-void BinaryTreeGenerator::printHeights() {
+void BinaryTreeGenerator::printHeights()
+{
     int treeHeight = tree.getHeight(tree.getTop());
     int PBBTHeight = PBBT.getHeight(PBBT.getTop());
     ui->heightsValueLabel->setText("Base: " + QString::number(treeHeight) + "\nPBBT: " + QString::number(PBBTHeight));

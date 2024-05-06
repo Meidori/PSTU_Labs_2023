@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <queue>
 #include <algorithm>
 
 #include <QtWidgets>
@@ -17,6 +18,7 @@ Node::Node()
     ptrToRight = nullptr;
     x = 0.0;
     y = 0.0;
+    posInSubTree = 0;
 }
 
 
@@ -28,6 +30,7 @@ Node::Node(char key)
     ptrToRight = nullptr;
     x = 0.0;
     y = 0.0;
+    posInSubTree = 0;
 }
 
 
@@ -48,6 +51,7 @@ void BinaryTree::insert(char key)
         ptrToTop -> ptrToParent = nullptr;
         ptrToTop -> x = 0.0;
         ptrToTop -> y = 0.0;
+        ptrToTop -> posInSubTree = 1;
     }
     else
     {
@@ -63,9 +67,8 @@ void BinaryTree::insert(char key)
                     newRoot -> ptrToLeft = nullptr;
                     newRoot -> ptrToRight = nullptr;
                     newRoot -> ptrToParent = root;
+                    newRoot->posInSubTree = root->posInSubTree * 2 - 1;
                     root -> ptrToLeft = newRoot;
-                    newRoot -> x = root -> x - 1000 / std::pow(2, getHeight(ptrToTop) - 1);
-                    newRoot -> y = root -> y + 100;
 
                     return;
                 }
@@ -83,9 +86,15 @@ void BinaryTree::insert(char key)
                     newRoot -> ptrToLeft = nullptr;
                     newRoot -> ptrToRight = nullptr;
                     newRoot -> ptrToParent = root;
+                    if (root == ptrToTop)
+                    {
+                        newRoot->posInSubTree = 1;
+                    }
+                    else
+                    {
+                        newRoot->posInSubTree = root->posInSubTree * 2;
+                    }
                     root -> ptrToRight = newRoot;
-                    newRoot -> x = root -> x + 100 + 1000 / std::pow(2, getHeight(ptrToTop) - 1);
-                    newRoot -> y = root -> y + 100;
 
                     return;
                 }
@@ -226,6 +235,31 @@ std::vector<char> BinaryTree::getAllElementsOfTree()
     std::vector<char> result;
     traverseAndAddToVector(ptrToTop, result);
     return result;
+}
+
+
+void BinaryTree::coordCalculation(Node* root)
+{
+    int height = getHeight(ptrToTop);
+    int width = 64 * height + 96 * height;
+    if (root != nullptr)
+    {
+        coordCalculation(root->ptrToLeft);
+        if (root == ptrToTop)
+        {
+            root->x = 0;
+        }
+        else if (root->key > ptrToTop->key)
+        {
+            root->x = width / (height - getHeight(root) + 1) * root->posInSubTree;
+        }
+        else if (root->key < ptrToTop->key)
+        {
+            root->x = -width + width / (height - getHeight(root) + 1) * root->posInSubTree;
+        }
+        root->y = (height - getHeight(root)) * 100;
+        coordCalculation(root->ptrToRight);
+    }
 }
 
 

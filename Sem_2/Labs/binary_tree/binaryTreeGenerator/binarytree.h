@@ -12,6 +12,7 @@ public:
     Node* ptrToLeft;          // указатель на дочерний левый узел
     Node* ptrToRight;         // указатель на дочерний правый узел
     double x, y;
+    int posInSubTree;
 
 
 public:
@@ -47,6 +48,10 @@ public:
     void traverseAndPrint(Node* root);
 
     std::vector<char> getAllElementsOfTree();
+
+    void coordCalculation(Node* root);
+
+    void countNodesAtLevels(Node* root, int level, std::vector<int>& levelCounts);
 
     char getMax();
 
