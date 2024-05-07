@@ -43,8 +43,13 @@ void BinaryTreeGenerator::addNode() {
 
 void BinaryTreeGenerator::traverseAndPrintBase()
 {
-    tree.coordCalculation(tree.getTop());
     scene->clear();
+    tree.coordCalculation(tree.getTop());
+    if (tree.isEmpty())
+    {
+        qDebug() << "Tree is empty";
+        return;
+    }
     Node* root = tree.getTop();
     traverseAndPrint(root, tree);
 }
