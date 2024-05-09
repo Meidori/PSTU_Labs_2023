@@ -13,6 +13,7 @@ public:
     Node* ptrToRight;         // указатель на дочерний правый узел
     double x, y;
     int posInSubTree;
+    int level;
 
 
 public:

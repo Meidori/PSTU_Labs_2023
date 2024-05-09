@@ -19,6 +19,7 @@ Node::Node()
     x = 0.0;
     y = 0.0;
     posInSubTree = 0;
+    level = 0;
 }
 
 
@@ -31,6 +32,7 @@ Node::Node(char key)
     x = 0.0;
     y = 0.0;
     posInSubTree = 0;
+    level = 0;
 }
 
 
@@ -52,6 +54,7 @@ void BinaryTree::insert(char key)
         ptrToTop -> x = 0.0;
         ptrToTop -> y = 0.0;
         ptrToTop -> posInSubTree = 1;
+        ptrToTop -> level = 1;
     }
     else
     {
@@ -68,6 +71,7 @@ void BinaryTree::insert(char key)
                     newRoot -> ptrToRight = nullptr;
                     newRoot -> ptrToParent = root;
                     newRoot->posInSubTree = root->posInSubTree * 2 - 1;
+                    newRoot->level = root->level + 1;
                     root -> ptrToLeft = newRoot;
 
                     return;
@@ -94,6 +98,7 @@ void BinaryTree::insert(char key)
                     {
                         newRoot->posInSubTree = root->posInSubTree * 2;
                     }
+                    newRoot->level = root->level + 1;
                     root -> ptrToRight = newRoot;
 
                     return;
@@ -247,17 +252,21 @@ void BinaryTree::coordCalculation(Node* root)
         coordCalculation(root->ptrToLeft);
         if (root == ptrToTop)
         {
-            root->x = 0;
+            root->x = 0.0;
+            root->y = 0.0;
         }
         else if (root->key > ptrToTop->key)
         {
-            root->x = width / (height - getHeight(root) + 1) * root->posInSubTree;
+            root->x = width / root->level * root->posInSubTree;
+            root->y = (root->level - 1) * 100;
         }
         else if (root->key < ptrToTop->key)
         {
-            root->x = -width + width / (height - getHeight(root) + 1) * root->posInSubTree;
+            root->x = -width + width / root->level * root->posInSubTree;
+            root->y = (root->level - 1) * 100;
         }
-        root->y = (height - getHeight(root)) * 100;
+
+        qDebug() << root->key << " " << root->x << " " << root->y << root->posInSubTree << getHeight(root);
         coordCalculation(root->ptrToRight);
     }
 }
