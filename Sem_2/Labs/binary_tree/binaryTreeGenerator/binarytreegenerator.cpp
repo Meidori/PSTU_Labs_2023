@@ -1,94 +1,91 @@
 #include "binarytreegenerator.h"
 #include "ui_binarytreegenerator.h"
-#include "binarytree.h"
-
-#include <QDebug>
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QGraphicsTextItem>
-
-#include <vector>
 
 BinaryTreeGenerator::BinaryTreeGenerator(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::BinaryTreeGenerator)
 {
-    ui -> setupUi(this);
+    ui->setupUi(this);
 
-    connect(ui -> addNodeBtn, SIGNAL(clicked()), this, SLOT(addNode()));
-
-    connect(ui -> printTreeBtn, SIGNAL(clicked()), this, SLOT(traverseAndPrintBase()));
-
-    connect(ui -> printPBBTBtn, SIGNAL(clicked()), this, SLOT(traverseAndPrintPBBT()));
-
-    connect(ui -> printMaxBtn, SIGNAL(clicked()), this, SLOT(printMaxNode()));
-
-    connect(ui -> printMinBtn, SIGNAL(clicked()), this, SLOT(printMinNode()));
-
-    connect(ui -> printHeightsBtn, SIGNAL(clicked()), this, SLOT(printHeights()));
-
-    graphicsView = ui -> graphicsView;
+    graphicsView = ui->graphicsView;
     scene = new QGraphicsScene;
-    graphicsView -> setScene(scene);
+    graphicsView->setScene(scene);
+
+    connect(ui->addNodeBtn, &QPushButton::clicked, this, &BinaryTreeGenerator::addNode);
+    connect(ui->printTreeBtn, &QPushButton::clicked, this, &BinaryTreeGenerator::traverseAndPrintBase);
+    connect(ui->printPBBTBtn, &QPushButton::clicked, this, &BinaryTreeGenerator::traverseAndPrintPBBT);
+    connect(ui->printMaxBtn, &QPushButton::clicked, this, &BinaryTreeGenerator::printMaxNode);
+    connect(ui->printMinBtn, &QPushButton::clicked, this, &BinaryTreeGenerator::printMinNode);
+    connect(ui->printHeightsBtn, &QPushButton::clicked, this, &BinaryTreeGenerator::printHeights);
+}
+
+BinaryTreeGenerator::~BinaryTreeGenerator()
+{
+    delete ui;
 }
 
 void BinaryTreeGenerator::addNode() {
-    QString nodeName = ui -> addNodeLine -> text();
+    // Считываем имя узла
+    QString nodeName = ui->addNodeLine->text();
     if (nodeName.isEmpty())
-        return; // Защита от пустого имени узла
-
+        return; // защита от пустого имени узла
     std::string node = nodeName.toStdString();
-    tree.insert(node[0]);
+
+    tree.insert(node[0]);   // добавляем узел в дерево
 }
 
 void BinaryTreeGenerator::traverseAndPrintBase()
 {
-    scene->clear();
-    tree.coordCalculation(tree.getTop());
+    scene->clear();     // очищаем сцену
+    tree.coordCalculation(tree.getTop());   // вычисляем координаты
     if (tree.isEmpty())
     {
         qDebug() << "Tree is empty";
         return;
     }
     Node* root = tree.getTop();
-    traverseAndPrint(root, tree);
+    traverseAndPrint(root, tree);   // выводим дерево
 }
 
 void BinaryTreeGenerator::traverseAndPrintPBBT()
 {
-    scene->clear();
-    PBBT = tree.regenerateToPBBT();
-    PBBT.coordCalculation(PBBT.getTop());
+    scene->clear();     // очищаем сцену
+    PBBT = tree.regenerateToPBBT();         // на основе базового дерева поиска делаем идеально сбалансированное
+    PBBT.coordCalculation(PBBT.getTop());   // вычисляем координаты
     if (PBBT.isEmpty())
     {
         qDebug() << "PBBT is empty!";
         return;
     }
     Node* root = PBBT.getTop();
-    traverseAndPrint(root, PBBT);
+    traverseAndPrint(root, PBBT);   // выводим дерево
 }
 
 void BinaryTreeGenerator::traverseAndPrint(Node* root, BinaryTree& tree)
 {
     if (root != nullptr)
     {
+        // Рекурсивно обходим левое поддерево
         traverseAndPrint(root->ptrToLeft, tree);
 
+        // "Рисуем" узел
         QString node = QString::fromLatin1(&(root->key), 1);
         QGraphicsEllipseItem *ellipse = scene->addEllipse(root->x, root->y, 64, 64, QPen(Qt::black), QBrush(Qt::lightGray));
         QGraphicsTextItem *textItem = scene->addText(node);
         textItem->setPos(ellipse->boundingRect().center().x() - textItem->boundingRect().width() / 2,
                          ellipse->boundingRect().center().y() - textItem->boundingRect().height() / 2);
 
+        // Проверяем, не пусто ли дерево и существует ли родитель у текущего узла
         if (!tree.isEmpty() && tree.hasParent(root->key) && root->ptrToParent != nullptr)
         {
+            // Берем координаты
             double parentX = root->ptrToParent->x;
             double parentY = root->ptrToParent->y;
             double currentNodeX = root->x;
             double currentNodeY = root->y;
 
             // Найдем центры эллипсов
-            QPointF parentCenter(parentX + 32, parentY + 32); // 32 - это половина ширины/высоты эллипса
+            QPointF parentCenter(parentX + 32, parentY + 32);
             QPointF currentNodeCenter(currentNodeX + 32, currentNodeY + 32);
 
             // Создаем линию между центрами эллипсов
@@ -96,32 +93,28 @@ void BinaryTreeGenerator::traverseAndPrint(Node* root, BinaryTree& tree)
         }
         ui->graphicsView->update();
 
+        // Рекурсивно обходим правое поддерево
         traverseAndPrint(root->ptrToRight, tree);
     }
 }
 
 void BinaryTreeGenerator::printMaxNode()
 {
-    char node = tree.getMax();
-    QString maxNode = QString::fromLatin1(&node, 1);
-    ui->maxValueLabel->setText(maxNode);
+    char node = tree.getMax();                          // Получаем максимаьный элемент дерева
+    QString maxNode = QString::fromLatin1(&node, 1);    // переводим его в QString
+    ui->maxValueLabel->setText(maxNode);                // и выводим на экран
 }
 
 void BinaryTreeGenerator::printMinNode()
 {
-    char node = tree.getMin();
-    QString minNode = QString::fromLatin1(&node, 1);
-    ui->minValueLabel->setText(minNode);
+    char node = tree.getMin();                          // Получаем минимальный элемент дерева
+    QString minNode = QString::fromLatin1(&node, 1);    // переводим его в QString
+    ui->minValueLabel->setText(minNode);                // и выводим на экран
 }
 
 void BinaryTreeGenerator::printHeights()
 {
-    int treeHeight = tree.getHeight(tree.getTop());
-    int PBBTHeight = PBBT.getHeight(PBBT.getTop());
-    ui->heightsValueLabel->setText("Base: " + QString::number(treeHeight) + "\nPBBT: " + QString::number(PBBTHeight));
-}
-
-BinaryTreeGenerator::~BinaryTreeGenerator()
-{
-    delete ui;
+    int treeHeight = tree.getHeight(tree.getTop());     // получаем высоту дерева поиска (базового)
+    int PBBTHeight = PBBT.getHeight(PBBT.getTop());     // получаем высоту идеально сбалансированного дерева
+    ui->heightsValueLabel->setText("Base: " + QString::number(treeHeight) + "\nPBBT: " + QString::number(PBBTHeight));  // вывод
 }

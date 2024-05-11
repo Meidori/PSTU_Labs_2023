@@ -81,7 +81,8 @@
      </font>
     </property>
     <property name="text">
-     <string>Print base tree</string>
+     <string>Print base tree
+(search)</string>
     </property>
    </widget>
    <widget class="QPushButton" name="printPBBTBtn">

@@ -2,9 +2,11 @@
 #define BINARYTREEGENERATOR_H
 
 #include <QMainWindow>
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <binarytree.h>
+#include <QDebug>
+#include <QGraphicsTextItem>
+#include <vector>
+
+#include "binarytree.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class BinaryTreeGenerator; }
@@ -16,22 +18,24 @@ class BinaryTreeGenerator : public QMainWindow
 
 public:
     BinaryTreeGenerator(QWidget *parent = nullptr);
-    BinaryTree tree;
-    BinaryTree PBBT;
-    QGraphicsView *graphicsView;
-    QGraphicsScene *scene;
     ~BinaryTreeGenerator();
 
+    void traverseAndPrint(Node* root, BinaryTree& tree);    // вывод дерева
+
 public slots:
-    void addNode();
-    void traverseAndPrintBase();
-    void traverseAndPrintPBBT();
-    void traverseAndPrint(Node* root, BinaryTree& tree);
-    void printMaxNode();
-    void printMinNode();
-    void printHeights();
+    void addNode();                 // добавление узла
+    void traverseAndPrintBase();    // сигнал вывода дерева поиска (базового)
+    void traverseAndPrintPBBT();    // сигнал вывода идеально сбалансированного дерева
+    void printMaxNode();            // вывод максимального значения в дереве
+    void printMinNode();            // вывод минимального значения в дереве
+    void printHeights();            // вывод высоты дерева
 
 private:
+    BinaryTree tree;    // Дерево поиска
+    BinaryTree PBBT;    // Идеально сбалансированное дерево
+
     Ui::BinaryTreeGenerator *ui;
+    QGraphicsView *graphicsView;
+    QGraphicsScene *scene;
 };
 #endif // BINARYTREEGENERATOR_H
