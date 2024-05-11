@@ -1,7 +1,10 @@
-#ifndef DELETEEDGEWINDOW_H
-#define DELETEEDGEWINDOW_H
+// Диалоговое окно удаления ребра
+
+#ifndef DELETEEDGE_H
+#define DELETEEDGE_H
 
 #include <QDialog>
+
 #include "graph.h"
 
 namespace Ui {
@@ -13,15 +16,15 @@ class DeleteEdgeWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit DeleteEdgeWindow(const Graph& graph, QWidget *parent = nullptr);
+    explicit DeleteEdgeWindow(Graph& graph, QWidget *parent = nullptr);
     ~DeleteEdgeWindow();
 
 public slots:
     void delEdge();
 
 private:
-    const Graph& m_graph;
+    Graph& m_graph;
     Ui::DeleteEdgeWindow *ui;
 };
 
-#endif // DELETEEDGEWINDOW_H
+#endif // DELETEEDGE_H

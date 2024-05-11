@@ -9,25 +9,31 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    addnewedgewindow.cpp \
-    deleteedgewindow.cpp \
-    deletenodewindow.cpp \
+    addedge.cpp \
+    deleteedge.cpp \
+    deletenode.cpp \
     graph.cpp \
     main.cpp \
-    graphgenerator.cpp
+    graphgenerator.cpp \
+    searchmenu.cpp \
+    tsp.cpp
 
 HEADERS += \
-    addnewedgewindow.h \
-    deleteedgewindow.h \
-    deletenodewindow.h \
+    addedge.h \
+    deleteedge.h \
+    deletenode.h \
     graph.h \
-    graphgenerator.h
+    graphgenerator.h \
+    searchmenu.h \
+    tsp.h
 
 FORMS += \
-    addnewedgewindow.ui \
-    deleteedgewindow.ui \
-    deletenodewindow.ui \
-    graphgenerator.ui
+    addedge.ui \
+    deleteedge.ui \
+    deletenode.ui \
+    graphgenerator.ui \
+    searchmenu.ui \
+    tsp.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

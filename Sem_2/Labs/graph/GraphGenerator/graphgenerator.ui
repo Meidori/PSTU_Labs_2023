@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>934</width>
+    <width>1044</width>
     <height>1056</height>
    </rect>
   </property>
@@ -114,7 +114,7 @@
      <string>Delete edge</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="floydBtn">
+   <widget class="QPushButton" name="searchBtn">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -129,61 +129,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Floyd's algorithm</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="dijkstraBtn">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>670</y>
-      <width>200</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>16</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Dijkstra's algorithm</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="bfsBtn">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>580</y>
-      <width>200</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>16</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Breadth-first search</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="dfsBtn">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>490</y>
-      <width>200</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>16</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Depth-First Search</string>
+     <string>Search menu</string>
     </property>
    </widget>
    <widget class="QPushButton" name="tspBtn">
@@ -211,7 +157,7 @@ Problem</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>934</width>
+     <width>1044</width>
      <height>22</height>
     </rect>
    </property>

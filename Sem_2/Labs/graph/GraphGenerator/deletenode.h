@@ -1,8 +1,11 @@
-#ifndef DELETENODEWINDOW_H
-#define DELETENODEWINDOW_H
+// Диалоговое окно удаления узла
+
+#ifndef DELETENODE_H
+#define DELETENODE_H
 
 #include <QDialog>
 #include <QGraphicsView>
+
 #include "graph.h"
 
 namespace Ui {
@@ -28,4 +31,4 @@ private:
     Ui::DeleteNodeWindow *ui;
 };
 
-#endif // DELETENODEWINDOW_H
+#endif // DELETENODE_H

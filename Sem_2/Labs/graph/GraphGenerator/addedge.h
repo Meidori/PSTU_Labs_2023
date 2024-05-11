@@ -1,7 +1,11 @@
-#ifndef ADDNEWEDGEWINDOW_H
-#define ADDNEWEDGEWINDOW_H
+// Диалоговое окно добавления ребра
+
+#ifndef ADDEDGE_H
+#define ADDEDGE_H
 
 #include <QDialog>
+#include <QGraphicsScene>
+
 #include "graph.h"
 
 namespace Ui {
@@ -13,15 +17,15 @@ class AddNewEdgeWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddNewEdgeWindow(const Graph& graph, QWidget *parent = nullptr);
+    explicit AddNewEdgeWindow(Graph& graph, QWidget *parent = nullptr);
     ~AddNewEdgeWindow();
 
 private slots:
     void addNewEdge();
 
 private:
-    const Graph& m_graph;
+    Graph& m_graph;
     Ui::AddNewEdgeWindow *ui;
 };
 
-#endif // ADDNEWEDGEWINDOW_H
+#endif // ADDEDGE_H
