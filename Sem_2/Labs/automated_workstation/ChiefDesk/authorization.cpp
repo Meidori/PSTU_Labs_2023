@@ -11,11 +11,11 @@ Authorization::Authorization(QWidget *parent) :
     db.setDatabaseName("/home/meidori/Рабочий стол/main/Sem_2/Labs/automated_workstation/Database/chiefdesk.db");
     if (db.open())
     {
-        ui->statusbar->showMessage("Successful connection to the database: " + db.databaseName());
+        ui->statusbar->showMessage("Успешное подключение к базе данных: " + db.databaseName());
     }
     else
     {
-        ui->statusbar->showMessage("An error occurred while connecting to the database: " + db.lastError().databaseText());
+        ui->statusbar->showMessage("Ошибка при подключении к базе данных: " + db.lastError().databaseText());
     }
 
     connect(ui->logInBtn, &QPushButton::clicked, this, &Authorization::login);

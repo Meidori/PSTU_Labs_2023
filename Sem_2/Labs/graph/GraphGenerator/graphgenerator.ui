@@ -29,7 +29,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Add node</string>
+     <string>Добавить узел</string>
     </property>
    </widget>
    <widget class="QPushButton" name="addEdgeBtn">
@@ -47,7 +47,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Add edge</string>
+     <string>Добавить ребро</string>
     </property>
    </widget>
    <widget class="QPushButton" name="updateArrowsBtn">
@@ -65,7 +65,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Update arrows</string>
+     <string>Обновить стрелки</string>
     </property>
    </widget>
    <widget class="QGraphicsView" name="printGraph">
@@ -93,7 +93,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Delete node</string>
+     <string>Удалить узел</string>
     </property>
    </widget>
    <widget class="QPushButton" name="deleteEdgeBtn">
@@ -111,7 +111,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Delete edge</string>
+     <string>Удалить ребро</string>
     </property>
    </widget>
    <widget class="QPushButton" name="searchBtn">
@@ -129,7 +129,8 @@
      </font>
     </property>
     <property name="text">
-     <string>Search menu</string>
+     <string>Меню поиска
+(обходов)</string>
     </property>
    </widget>
    <widget class="QPushButton" name="tspBtn">
@@ -147,8 +148,8 @@
      </font>
     </property>
     <property name="text">
-     <string>Travelling Salesman
-Problem</string>
+     <string>Задача
+Коммивояжёра</string>
     </property>
    </widget>
   </widget>

@@ -27,13 +27,13 @@ void CreateReport::addReport()
 
     if (!query.exec())
     {
-        qDebug() << "Error checking task information:" << query.lastError().text();
+        qDebug() << "Ошибка проверки информации задачи:" << query.lastError().text();
         return;
     }
 
     if (!query.next())
     {
-        qDebug() << "Task not found for the current employee.";
+        qDebug() << "Задача не найдена для данного сотрудика.";
         return;
     }
 
@@ -45,11 +45,11 @@ void CreateReport::addReport()
 
     if (!updateQuery.exec())
     {
-        qDebug() << "Error updating task report:" << updateQuery.lastError().text();
+        qDebug() << "Ошибка обновления отчета:" << updateQuery.lastError().text();
         return;
     }
 
-    qDebug() << "Report added/updated successfully.";
+    qDebug() << "Отчет добавлен/обновлен.";
     close();
 }
 

@@ -46,7 +46,7 @@ void RegistrationWindow::reg()
         query.bindValue(":code", companyCode);
         if (!query.exec())
         {
-            qDebug() << "Error inserting company:" << query.lastError().text();
+            qDebug() << "Ошибка добавления компании:" << query.lastError().text();
             return; // Выйти из функции при ошибке
         }
 
@@ -61,7 +61,7 @@ void RegistrationWindow::reg()
         query.bindValue(":companyId", companyId);
         if (!query.exec())
         {
-            qDebug() << "Error inserting chief:" << query.lastError().text();
+            qDebug() << "Ошибка добавления chief:" << query.lastError().text();
             return; // Выйти из функции при ошибке
         }
 
@@ -77,7 +77,7 @@ void RegistrationWindow::reg()
         query.bindValue(":code", comp);
         if (!query.exec())
         {
-            qDebug() << "Error searching for company:" << query.lastError().text();
+            qDebug() << "Ошибка поиска компании:" << query.lastError().text();
             return; // Выйти из функции при ошибке
         }
 
@@ -88,7 +88,7 @@ void RegistrationWindow::reg()
         }
         else
         {
-            qDebug() << "Company with code" << comp << "not found!";
+            qDebug() << "Компания с кодом" << comp << "не найдена!";
             return; // Выйти из функции, если компания не найдена
         }
 
@@ -100,12 +100,12 @@ void RegistrationWindow::reg()
         query.bindValue(":companyId", companyId);
         if (!query.exec())
         {
-            qDebug() << "Error inserting employee:" << query.lastError().text();
+            qDebug() << "Ошибка добавления employee:" << query.lastError().text();
             return; // Выйти из функции при ошибке
         }
 
         // Успешно завершено
-        qDebug() << "Employee registration successful!";
+        qDebug() << "Регистрация прошла успешно!";
         close();
     }
 

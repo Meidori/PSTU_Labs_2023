@@ -76,7 +76,7 @@
     </font>
    </property>
    <property name="text">
-    <string>To</string>
+    <string>До</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
@@ -97,7 +97,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Delete edge</string>
+    <string>Удалить ребро</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -118,7 +118,7 @@
     </font>
    </property>
    <property name="text">
-    <string>From</string>
+    <string>От</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>

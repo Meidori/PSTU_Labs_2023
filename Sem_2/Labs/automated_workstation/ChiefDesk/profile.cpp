@@ -8,8 +8,8 @@ Profile::Profile(QList<QString> _profileData, QWidget *parent) :
     ui->setupUi(this);
 
     // Обновляем информацию профиля:
-    QString outputInfo = "Profile name: " + profileData[0] + "\nAccess rights: " + profileData[1] +
-            "\nCompany name: " + profileData[2] + "\nAmount of employees: " + profileData[4];
+    QString outputInfo = "Имя профиля: " + profileData[0] + "\nПрава доступа: " + profileData[1] +
+            "\nНазвание компании: " + profileData[2] + "\nКоличество сотрудников: " + profileData[4];
     ui->infoLabel->setText(outputInfo);
 
     connect(ui->getInvCodeBtn, &QPushButton::clicked, this, &Profile::getInvCode);
@@ -34,16 +34,16 @@ void Profile::getInvCode()
     {
         QClipboard *clipboard = QApplication::clipboard();
         clipboard->setText(code);
-        ui->getInvCodeBtn->setText("Copied!");
+        ui->getInvCodeBtn->setText("Скопировано!");
         QTimer::singleShot(1000, [&]() {
-            ui->getInvCodeBtn->setText("Get invitation\ncode");
+            ui->getInvCodeBtn->setText("Получить код\nприглашения");
         });
     }
     else if (role == "employee")
     {
-        ui->getInvCodeBtn->setText("No access!");
+        ui->getInvCodeBtn->setText("Нет прав\nдоступа!");
         QTimer::singleShot(1000, [&]() {
-            ui->getInvCodeBtn->setText("Get invitation\ncode");
+            ui->getInvCodeBtn->setText("Получить код\nприглашения");
         });
     }
 }

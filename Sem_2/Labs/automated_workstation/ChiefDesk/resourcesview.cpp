@@ -42,7 +42,7 @@ void ResourcesView::addRes()
     // Проверяем, чтобы оба поля были заполнены
     if (resName.isEmpty() || amountStr.isEmpty())
     {
-        qDebug() << "Resource name and amount are required.";
+        qDebug() << "Название ресурса и сумма обязательны.";
         return;
     }
 
@@ -78,11 +78,11 @@ void ResourcesView::addRes()
 
     if (success)
     {
-        qDebug() << "Resource added/updated successfully.";
+        qDebug() << "Ресурс успешно добавлен/обновлен.";
     }
     else
     {
-        qDebug() << "Error adding/updating resource:" << query.lastError().text();
+        qDebug() << "Ошибка добавления/обновления ресурса:" << query.lastError().text();
     }
 }
 
@@ -95,7 +95,7 @@ void ResourcesView::removeRes()
     // Проверяем, чтобы оба поля были заполнены
     if (resName.isEmpty() || amountStr.isEmpty())
     {
-        qDebug() << "Resource name and amount are required.";
+        qDebug() << "Название ресурса и сумма обязательны.";
         return;
     }
 
@@ -106,13 +106,13 @@ void ResourcesView::removeRes()
 
     if (!query.exec())
     {
-        qDebug() << "Error retrieving resource information:" << query.lastError().text();
+        qDebug() << "Ошибка при получении информации о ресурсе:" << query.lastError().text();
         return;
     }
 
     if (!query.next())
     {
-        qDebug() << "Resource not found.";
+        qDebug() << "Ресурс не найден.";
         return;
     }
 
@@ -134,10 +134,10 @@ void ResourcesView::removeRes()
 
     if (!updateQuery.exec())
     {
-        qDebug() << "Error updating resource amount:" << updateQuery.lastError().text();
+        qDebug() << "Ошибка при обновлении количества ресурсов:" << updateQuery.lastError().text();
         return;
     }
 
-    qDebug() << "Resource amount updated successfully.";
+    qDebug() << "Количество ресурсов успешно обновлено.";
 }
 

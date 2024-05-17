@@ -28,7 +28,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Back</string>
+    <string>Назад</string>
    </property>
   </widget>
   <widget class="QTextEdit" name="reportTextEdit">
@@ -56,7 +56,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Print</string>
+    <string>Вывод</string>
    </property>
   </widget>
  </widget>

@@ -28,7 +28,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Delete node</string>
+    <string>Удалить узел</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -67,7 +67,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Node number</string>
+    <string>Номер узла</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>

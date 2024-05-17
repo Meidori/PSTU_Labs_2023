@@ -28,7 +28,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Amount</string>
+    <string>Количество</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -49,7 +49,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Add</string>
+    <string>Добавить</string>
    </property>
   </widget>
   <widget class="QPushButton" name="backBtn">
@@ -67,7 +67,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Back</string>
+    <string>Назад</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="resNameLineEdit">
@@ -85,7 +85,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Resource name</string>
+    <string>Название</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -116,7 +116,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Remove</string>
+    <string>Убрать</string>
    </property>
   </widget>
  </widget>

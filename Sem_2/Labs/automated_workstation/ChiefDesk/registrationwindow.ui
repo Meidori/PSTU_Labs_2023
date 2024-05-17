@@ -37,7 +37,7 @@
     <bool>false</bool>
    </property>
    <property name="title">
-    <string>Registration</string>
+    <string>Регистрация</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -141,7 +141,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Create a new company</string>
+        <string>Создать новую компанию</string>
        </property>
       </widget>
      </item>
@@ -153,7 +153,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Sign Up</string>
+        <string>Создать аккаунт</string>
        </property>
       </widget>
      </item>

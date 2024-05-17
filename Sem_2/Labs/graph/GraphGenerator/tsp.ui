@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>TSP</string>
   </property>
   <widget class="QPushButton" name="solveBtn">
    <property name="geometry">
@@ -28,7 +28,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Solve</string>
+    <string>Решить</string>
    </property>
   </widget>
   <widget class="QLabel" name="fromLabel">
@@ -46,7 +46,7 @@
     </font>
    </property>
    <property name="text">
-    <string>From:</string>
+    <string>От</string>
    </property>
   </widget>
   <widget class="QLabel" name="toLabel">
@@ -64,7 +64,7 @@
     </font>
    </property>
    <property name="text">
-    <string>To:</string>
+    <string>До</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="fromLine">

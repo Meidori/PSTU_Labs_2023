@@ -26,7 +26,7 @@ void output::dfs()
     std::vector<int> visited = m_graph->dfs(start);     // вызываем метод графа для обхода в глубину
     // Вывод:
     ui->outputDist->clear();
-    ui->outputDist->setText("Path availability:\n");
+    ui->outputDist->setText("Наличие прохода к узлу:\n");
     for (int i = 1; i < visited.size(); i++)
     {
         QString node = QString::number(i), isVisited = QString::number(visited[i]);
@@ -46,7 +46,7 @@ void output::bfs()
     std::vector<int> distance = m_graph->bfs(start);    // вызываем метод графа для обхода в ширину
     // Вывод:
     ui->outputDist->clear();
-    ui->outputDist->setText("Minimum number of edges from the start node:\n");
+    ui->outputDist->setText("Минимальное количество ребер от стартого узла:\n");
     for (int i = 1; i < distance.size(); i++)
     {
         QString from = QString::number(start), to = QString::number(i), dist = QString::number(distance[i]);
@@ -63,8 +63,7 @@ void output::floyd()
     std::vector<std::vector<int>> distance = m_graph->floyd();  // вызываем метод графа для алгоритма Флойда
     // Вывод:
     ui->outputDist->clear();
-    ui->outputDist->setText("Shortest path from each node to each node");
-    QString text;
+    QString text = "Кратчайший путь от каждого до каждого:\n";
     text.append("     ");
     for (int i = 0; i < m_graph->getSize() - 1; i++)
     {
@@ -98,14 +97,13 @@ void output::dijkstra()
     std::vector<int> distance = m_graph->dijkstra(start);   // вызываем метод графа для алгоритма Дейкстры
     // Вывод:
     ui->outputDist->clear();
-    ui->outputDist->setText("Minimum number of edges (considering the minimumpath length)\nfrom the start node:\n");
+    QString newText = "Количество ребер от стартого узла, при минимальной дистанции:\n";
     for (int i = 1; i < distance.size(); i++)
     {
         QString from = QString::number(start), to = QString::number(i), dist = QString::number(distance[i]);
         QString line;
         line.append(from).append(" -> ").append(to).append(" : ").append(dist).append("\n");
-        QString currentText = ui->outputDist->text();
-        QString newText = currentText + line;
-        ui->outputDist->setText(newText);
+        newText += line;
     }
+    ui->outputDist->setText(newText);
 }

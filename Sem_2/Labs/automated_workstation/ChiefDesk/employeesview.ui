@@ -28,7 +28,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Back</string>
+    <string>Назад</string>
    </property>
   </widget>
   <widget class="QTableView" name="employeesTableView">

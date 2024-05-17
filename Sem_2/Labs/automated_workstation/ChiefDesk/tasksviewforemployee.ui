@@ -28,7 +28,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Back</string>
+    <string>Назад</string>
    </property>
   </widget>
   <widget class="QTableView" name="tasksTableView">
@@ -56,7 +56,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Task Id</string>
+    <string>Id задачи</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -77,8 +77,8 @@
     </font>
    </property>
    <property name="text">
-    <string>Mark as
-complete</string>
+    <string>Отметить
+выполненым</string>
    </property>
   </widget>
   <widget class="QPushButton" name="reportBtn">
@@ -96,7 +96,7 @@ complete</string>
     </font>
    </property>
    <property name="text">
-    <string>Create report</string>
+    <string>Создать отчет</string>
    </property>
   </widget>
  </widget>

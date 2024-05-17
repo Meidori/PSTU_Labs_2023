@@ -29,7 +29,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Add node</string>
+     <string>Добавить узел</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="addNodeLine">
@@ -81,8 +81,8 @@
      </font>
     </property>
     <property name="text">
-     <string>Print base tree
-(search)</string>
+     <string>Вывести базовое
+дерево (поиска)</string>
     </property>
    </widget>
    <widget class="QPushButton" name="printPBBTBtn">
@@ -100,7 +100,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Print PBBT</string>
+     <string>Вывести PBBT</string>
     </property>
    </widget>
    <widget class="QPushButton" name="printHeightsBtn">
@@ -118,7 +118,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Get height</string>
+     <string>Высота</string>
     </property>
    </widget>
    <widget class="QPushButton" name="printMaxBtn">
@@ -136,7 +136,8 @@
      </font>
     </property>
     <property name="text">
-     <string>Get max node</string>
+     <string>Максимальное
+значение узла</string>
     </property>
    </widget>
    <widget class="QPushButton" name="printMinBtn">
@@ -154,7 +155,8 @@
      </font>
     </property>
     <property name="text">
-     <string>Get min node</string>
+     <string>Минимальное
+значение узла</string>
     </property>
    </widget>
    <widget class="QLabel" name="minValueLabel">

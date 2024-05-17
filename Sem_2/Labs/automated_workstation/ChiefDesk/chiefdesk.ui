@@ -50,7 +50,7 @@
      </font>
     </property>
     <property name="text">
-     <string>View profile</string>
+     <string>Профиль</string>
     </property>
    </widget>
    <widget class="QPushButton" name="viewEmployeesBtn">
@@ -68,8 +68,8 @@
      </font>
     </property>
     <property name="text">
-     <string>View
-employees</string>
+     <string>Список
+сотрудников</string>
     </property>
    </widget>
    <widget class="QPushButton" name="viewTasksBtn">
@@ -87,7 +87,8 @@ employees</string>
      </font>
     </property>
     <property name="text">
-     <string>View tasks</string>
+     <string>Просмотр
+задач</string>
     </property>
    </widget>
    <widget class="QPushButton" name="resControlBtn">
@@ -105,8 +106,8 @@ employees</string>
      </font>
     </property>
     <property name="text">
-     <string>Resource
-control</string>
+     <string>Контроль
+ресурсов</string>
     </property>
    </widget>
   </widget>

@@ -30,7 +30,7 @@ void GetReport::getReport()
 
     if (!query.exec())
     {
-        qDebug() << "Error fetching report from database:" << query.lastError().text();
+        qDebug() << "Ошибка поиска отчета в базе данных:" << query.lastError().text();
         return;
     }
 
@@ -45,6 +45,6 @@ void GetReport::getReport()
     }
     else
     {
-        qDebug() << "No report found for the specified task ID.";
+        qDebug() << "Нет отчета по данному id задачи.";
     }
 }

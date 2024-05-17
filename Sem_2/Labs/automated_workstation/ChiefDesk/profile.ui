@@ -28,7 +28,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Profile</string>
+    <string>Профиль</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -49,10 +49,10 @@
     </font>
    </property>
    <property name="text">
-    <string>Profile name:
-Access rights
-Company name:
-Amount of employees:</string>
+    <string>Имя профиля:
+Права доступа:
+Название компании:
+Количество сотрудников:</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -73,8 +73,9 @@ Amount of employees:</string>
     </font>
    </property>
    <property name="text">
-    <string>Get invitation
-code</string>
+    <string>Скорпировать
+код
+приглашения</string>
    </property>
   </widget>
   <widget class="QPushButton" name="backBtn">
@@ -92,7 +93,7 @@ code</string>
     </font>
    </property>
    <property name="text">
-    <string>Back</string>
+    <string>Назад</string>
    </property>
   </widget>
  </widget>

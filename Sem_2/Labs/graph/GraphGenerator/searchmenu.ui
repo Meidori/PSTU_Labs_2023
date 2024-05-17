@@ -28,7 +28,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Depth-First search</string>
+    <string>Обход в глубину</string>
    </property>
   </widget>
   <widget class="QPushButton" name="bfsBtn">
@@ -46,7 +46,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Breadth-First search</string>
+    <string>Обход в ширину</string>
    </property>
   </widget>
   <widget class="QPushButton" name="floydBtn">
@@ -64,7 +64,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Floyd's algorithm</string>
+    <string>Алгоритм Флойда</string>
    </property>
   </widget>
   <widget class="QPushButton" name="dijkstraBtn">
@@ -82,7 +82,8 @@
     </font>
    </property>
    <property name="text">
-    <string>Dijkstra's algorithm</string>
+    <string>Алгоритмт
+Дeйкстры</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="startLine">
@@ -100,7 +101,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Enter the start node</string>
+    <string>Стартовая позиция</string>
    </property>
   </widget>
   <widget class="QLabel" name="titleLabel">
@@ -118,7 +119,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Search output:</string>
+    <string>Результат поиска</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

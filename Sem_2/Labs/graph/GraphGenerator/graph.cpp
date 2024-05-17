@@ -393,43 +393,61 @@ std::vector<int> Graph::dijkstra(int start)
 
 std::vector<int> Graph::tsp(int start, int end)
 {
-    std::vector<int> path;
-    std::vector<bool> visited(sizeOfMatrix, false);
+    std::vector<int> bestPath;  // Вектор для хранения наилучшего пути
+    int minCost = INT_MAX;
 
-    int curNode = start;
-    // Добавляем начальную точку в путь и отмечаем как посещенную
+    std::vector<int> path;      // Вектор для хранения текущего пути
+    std::vector<bool> visited(sizeOfMatrix, false);     // Вектор для отслеживания посещенных узлов
+
+    // Запуск рекурсивного обхода
+    tspUtil(start, end, path, visited, 0, minCost, bestPath);
+
+    // Добавляем конечный узел (начальный, в который мы возвращаемся) в путь для завершения цикла
+    if (!bestPath.empty())
+    {
+        bestPath.push_back(start);
+    }
+
+    return bestPath;
+}
+
+void Graph::tspUtil(int curNode, int endNode, std::vector<int>& path, std::vector<bool>& visited, int curCost, int& minCost, std::vector<int>& bestPath)
+{
+    // Добавляем текущий узел в путь и помечаем его как посещенный
     path.push_back(curNode);
     visited[curNode] = true;
 
-    while (path.size() < sizeOfMatrix)
+    // Проверка, если все узлы посещены
+    if (path.size() == sizeOfMatrix - 1)
     {
-        int nextNode = -1;
-        int minDistance = INT_MAX;
-
-        // Найдем ближайшего непосещенного соседа
-        for (int i = 1; i < sizeOfMatrix; ++i)
+        // Проверяем, если текущая стоимость пути меньше минимальной
+        if (curCost < minCost)
         {
-            // Если вершина не посещена, есть ребро до нее и расстояние меньше минимального
-            if (!visited[i] && matrix[curNode][i] != 0 && matrix[curNode][i] < minDistance)
-            {
-                // Обновляем ближайшего соседа и минимальное расстояние
-                minDistance = matrix[curNode][i];
-                nextNode = i;
-            }
+            // Обновляем минимальную стоимость и наилучший путь
+            minCost = curCost;
+            bestPath = path;
         }
-
-        // Если не найден непосещенный сосед, вернемся к начальной точке
-        if (nextNode == -1)
-            nextNode = start;
-
-        // Переходим к следующему узлу
-        path.push_back(nextNode);
-        visited[nextNode] = true;
-        curNode = nextNode;
+        // Снятие метки посещения и удаление узла из пути
+        visited[curNode] = false;
+        path.pop_back();
+        return;     // Возвращаемся к предыдущему узлу
     }
 
-    // Добавляем конечную точку
-    path.push_back(end);
+    // Перебираем все узлы графа для поиска следующего узла
+    for (int nextNode = 1; nextNode < sizeOfMatrix; nextNode++)
+    {
+        // Проверяем, если следующий узел не посещен и существует ребро между текущим и следующим узлом
+        if (!visited[nextNode] && matrix[nextNode][curNode] != 0)
+        {
+            int newCost = curCost + matrix[nextNode][curNode];      // Обновляем текущую стоимость пути
+            tspUtil(nextNode, endNode, path, visited, newCost, minCost, bestPath);      // Рекурсивный вызов для следующего узла
+        }
+    }
 
-    return path;
+    // Снятие метки посещения и удаление узла из пути
+    visited[curNode] = false;
+    path.pop_back();
 }
+
+
+

@@ -29,7 +29,7 @@ void LoginWindow::login()
         query.bindValue(":password", pass);
         if (!query.exec())
         {
-            qDebug() << "Error searching for user:" << query.lastError().text();
+            qDebug() << "Ошибка поиска пользователя:" << query.lastError().text();
             return; // Выйти из функции при ошибке
         }
 
@@ -56,7 +56,7 @@ void LoginWindow::login()
         }
         else
         {
-            qDebug() << "User not found.";
+            qDebug() << "Пользователь не найден.";
         }
     }
 }

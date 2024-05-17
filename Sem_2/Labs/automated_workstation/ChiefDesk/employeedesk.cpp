@@ -29,7 +29,7 @@ void EmployeeDesk::viewProfile()
     profileQuery.bindValue(":id", id);
     if (!profileQuery.exec())
     {
-        qDebug() << "Error retrieving profile data:" << profileQuery.lastError().text();
+        qDebug() << "Ошибка извлечения данных профиля:" << profileQuery.lastError().text();
         return;
     }
 
@@ -44,7 +44,7 @@ void EmployeeDesk::viewProfile()
     }
     else
     {
-        qDebug() << "Profile data not found for employee with ID:" << id;
+        qDebug() << "Данные профиля не найдены, по данному id сотрудника:" << id;
         return;
     }
 
@@ -56,7 +56,7 @@ void EmployeeDesk::viewProfile()
     countQuery.bindValue(":companyName", companyName);
     if (!countQuery.exec())
     {
-        qDebug() << "Error counting employees:" << countQuery.lastError().text();
+        qDebug() << "Ошибка данных количества сотрудников:" << countQuery.lastError().text();
         return;
     }
 
@@ -68,17 +68,17 @@ void EmployeeDesk::viewProfile()
     }
     else
     {
-        qDebug() << "Error: Count query returned no results";
+        qDebug() << "Ошибка: запрос не вернул результат";
         return;
     }
 
     // Вывод в консоль
-    qDebug() << "Profile data retrieved successfully:";
+    qDebug() << "Profile data:";
     qDebug() << "Login:" << login;
     qDebug() << "Role:" << role;
     qDebug() << "Company Name:" << companyName;
     qDebug() << "Invitation Code:" << invitationCode;
-    qDebug() << "Amount of Employees in the Same Company:" << amountOfEmployees;
+    qDebug() << "Amount of Employees:" << amountOfEmployees;
 
     QList<QString> profileData;
     profileData.append(login);
@@ -100,7 +100,7 @@ void EmployeeDesk::viewEmployees()
     companyIdQuery.bindValue(":id", id);
     if (!companyIdQuery.exec())
     {
-        qDebug() << "Error retrieving company_id:" << companyIdQuery.lastError().text();
+        qDebug() << "Ошибка извлечения company_id:" << companyIdQuery.lastError().text();
         return;
     }
 
@@ -111,7 +111,7 @@ void EmployeeDesk::viewEmployees()
     }
     else
     {
-        qDebug() << "Error: company_id not found for employee with ID:" << id;
+        qDebug() << "Ошибка: company_id не найден для данного id сотрудника:" << id;
         return;
     }
 
@@ -129,7 +129,7 @@ void EmployeeDesk::viewResources()
     companyIdQuery.bindValue(":id", id);
     if (!companyIdQuery.exec())
     {
-        qDebug() << "Error retrieving company_id:" << companyIdQuery.lastError().text();
+        qDebug() << "Ошибка извлечения company_id:" << companyIdQuery.lastError().text();
         return;
     }
 
@@ -140,7 +140,7 @@ void EmployeeDesk::viewResources()
     }
     else
     {
-        qDebug() << "Error: company_id not found for employee with ID:" << id;
+        qDebug() << "Ошибка: company_id не найден для данного id сотрудника:" << id;
         return;
     }
 
@@ -158,7 +158,7 @@ void EmployeeDesk::viewTasks()
     companyIdQuery.bindValue(":id", id);
     if (!companyIdQuery.exec())
     {
-        qDebug() << "Error retrieving company_id:" << companyIdQuery.lastError().text();
+        qDebug() << "Ошибка извлечения company_id:" << companyIdQuery.lastError().text();
         return;
     }
 
@@ -169,7 +169,7 @@ void EmployeeDesk::viewTasks()
     }
     else
     {
-        qDebug() << "Error: company_id not found for employee with ID:" << id;
+        qDebug() << "Ошибка: company_id не найден для данного id сотрудника:" << id;
         return;
     }
 

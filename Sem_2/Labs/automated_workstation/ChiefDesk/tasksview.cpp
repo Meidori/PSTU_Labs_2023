@@ -42,7 +42,7 @@ void TasksView::addTask()
     // Проверяем, чтобы оба поля были заполнены
     if (taskName.isEmpty() || empId.isEmpty())
     {
-        qDebug() << "Task name and employee ID are required.";
+        qDebug() << "Task name и employee ID обязательны.";
         return;
     }
 
@@ -54,11 +54,11 @@ void TasksView::addTask()
     query.bindValue(":companyId", companyId);
 
     if (!query.exec()) {
-        qDebug() << "Error adding task:" << query.lastError().text();
+        qDebug() << "Ошибка при добавлении задачи:" << query.lastError().text();
         return;
     }
 
-    qDebug() << "Task added successfully.";
+    qDebug() << "Задача успешно добавлена.";
 
     // Обновляем task_id в таблице Employees
     QSqlQuery updateQuery;
@@ -67,11 +67,11 @@ void TasksView::addTask()
     updateQuery.bindValue(":employeeId", empId.toInt());
 
     if (!updateQuery.exec()) {
-        qDebug() << "Error updating employee task ID:" << updateQuery.lastError().text();
+        qDebug() << "Ошибка обновления для сотрудника:" << updateQuery.lastError().text();
         return;
     }
 
-    qDebug() << "Employee task ID updated successfully.";
+    qDebug() << "Id задачи успешно обновлен.";
 }
 
 void TasksView::getReport()

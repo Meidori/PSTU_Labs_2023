@@ -50,6 +50,7 @@ public:
     std::vector<std::vector<int>> floyd();
     std::vector<int> dijkstra(int);
     std::vector<int> tsp(int, int);
+    void tspUtil(int, int, std::vector<int>&, std::vector<bool>&, int, int&, std::vector<int>&);
 
 };
 

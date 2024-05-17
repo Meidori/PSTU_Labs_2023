@@ -40,7 +40,7 @@ void TasksViewForEmployee::complete()
     // Проверяем, что taskId не пустой
     if (taskId.isEmpty())
     {
-        qDebug() << "Task ID is required.";
+        qDebug() << "Task ID обязателен.";
         return;
     }
 
@@ -52,13 +52,13 @@ void TasksViewForEmployee::complete()
 
     if (!query.exec())
     {
-        qDebug() << "Error checking task information:" << query.lastError().text();
+        qDebug() << "Ошибка проверки данных о задаче:" << query.lastError().text();
         return;
     }
 
     if (!query.next())
     {
-        qDebug() << "Task not found for the current employee.";
+        qDebug() << "Задача не найдена для данного сотрудника.";
         return;
     }
 
@@ -69,11 +69,11 @@ void TasksViewForEmployee::complete()
 
     if (!updateQuery.exec())
     {
-        qDebug() << "Error updating task status:" << updateQuery.lastError().text();
+        qDebug() << "Ошибка обновления статуса задачи:" << updateQuery.lastError().text();
         return;
     }
 
-    qDebug() << "Task completed successfully.";
+    qDebug() << "Состояние задачи успешно обновлено!";
 }
 
 void TasksViewForEmployee::createReport()

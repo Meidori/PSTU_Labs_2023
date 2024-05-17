@@ -29,7 +29,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Log In</string>
+     <string>Вход</string>
     </property>
    </widget>
    <widget class="QPushButton" name="signUpBtn">
@@ -47,7 +47,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Sign Up</string>
+     <string>Регистрация</string>
     </property>
    </widget>
   </widget>
