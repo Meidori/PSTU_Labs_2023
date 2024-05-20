@@ -6,6 +6,8 @@
 
 Разработать приложение с графическим интерфейсом для генерации графов и выполнения обходов по ним
 
+<image src="images/task.png">
+
 # Функционал
 
 1. Добавление узла
@@ -1402,4 +1404,4 @@ TSP::~TSP()
 
 # Пример работы
 
-https://www.youtube.com/watch?v=sIjwo-KzAus
+https://github.com/Meidori/PSTU_Labs_2023/assets/86147868/3e83344b-6c9b-44e9-958f-c6363e75d0cb
